@@ -379,6 +379,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <button class="btn btn-accent mt16" style="max-width:200px" onclick="saveManualGps()">💾 SALVA GPS</button>
 </div>
 
+<!-- JSON PASTE SECTION -->
+<div class="ai-upload-card">
+  <h3>📋 Incolla JSON da Claude</h3>
+  <p>Carica il PDF K-Sport su Claude → chiedi "dammi il JSON" → copia il JSON → incollalo qui sotto. Funziona sempre, zero errori.</p>
+  <textarea id="json-paste-area" style="width:100%;height:160px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:12px;font-size:12px;font-family:monospace;outline:none;resize:vertical" placeholder='Incolla qui il JSON con i dati GPS...
+```
+
+{“sessionDate”:“2026-04-29”,“platform”:“K-Sport”,“players”:[{“name”:“ACCARDI”,“td”:3325,…}]}’></textarea>
+<button class="btn btn-accent mt16" style="max-width:220px" onclick="loadFromJson()">⚡ CARICA DATI GPS</button>
+<div id="json-result" style="display:none;margin-top:12px"></div>
+</div>
+
+```
 <div>
   <div class="section-title" style="font-size:16px">📋 Sessioni <span>Salvate</span></div>
   <div id="session-list"><div style="color:var(--text2);font-size:12px;padding:14px;text-align:center">Nessuna sessione</div></div>
@@ -889,6 +902,36 @@ window.saveGpsAll=function(data){
     showToast(`${players.length} giocatori GPS salvati! ✅`);
     renderReadiness();
   });
+};
+
+// ═══ JSON PASTE ═══
+window.loadFromJson=function(){
+  const raw=document.getElementById('json-paste-area').value.trim();
+  if(!raw){showToast('Incolla il JSON prima ❗',false);return;}
+  try{
+    const data=JSON.parse(raw);
+    const players=(data.players||[]).filter(p=>p.name&&!p.name.includes('AVERAGE'));
+    if(players.length===0){showToast('Nessun giocatore trovato nel JSON ❗',false);return;}
+    const rosterNames=roster.map(r=>r.name.toUpperCase());
+    let html=`<div style="font-size:12px;color:var(--text2);margin-bottom:10px">
+      ✅ <strong style="color:var(--accent)">${players.length} giocatori</strong> da <strong>${data.platform||'GPS'}</strong> · ${data.sessionDate||''}
+    </div><div style="overflow-x:auto">
+    <table class="ai-result-table">
+      <thead><tr><th>Nome</th><th>Rosa</th><th>TD</th><th>HSR</th><th>Acc</th><th>Dec</th><th>PM</th></tr></thead><tbody>`;
+    players.forEach(p=>{
+      const ok=rosterNames.includes(p.name?.toUpperCase());
+      html+=`<tr><td><strong>${p.name}</strong></td>
+      <td><span class="match-tag ${ok?'match-ok':'match-new'}">${ok?'✓ Rosa':'+ Nuovo'}</span></td>
+      <td>${p.td||'—'}</td><td>${p.hsr||'—'}</td><td>${p.acc||'—'}</td><td>${p.dec||'—'}</td><td>${p.pm||'—'}</td></tr>`;
+    });
+    html+=`</tbody></table></div>
+    <button class="btn btn-accent mt16" style="max-width:220px" onclick='saveGpsAll(${JSON.stringify(data)})'>💾 SALVA TUTTI IN FIREBASE</button>`;
+    const el=document.getElementById('json-result');
+    el.style.display='block';el.innerHTML=html;
+    showToast(`${players.length} giocatori pronti! ✅`);
+  }catch(e){
+    showToast('JSON non valido. Copia di nuovo da Claude ❗',false);
+  }
 };
 
 // ═══ MANUAL GPS ═══
