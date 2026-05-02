@@ -14,35 +14,30 @@
   --bg:#060a0f;--surface:#0c1420;--surface2:#101c2c;--surface3:#162034;
   --border:#1a2d42;--border2:#243d58;
   --accent:#00c2ff;--accent2:#0066ee;--accent3:#00aaee;
-  --green:#00e676;--green2:#00c853;
-  --orange:#ff9800;--red:#f44336;--text:#ddeeff;--text2:#6a8faa;--gold:#ffd700;
+  --green:#00e676;--orange:#ff9800;--red:#f44336;
+  --text:#ddeeff;--text2:#6a8faa;--gold:#ffd700;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* ── LANDING ── */
 #landing{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;
 background:radial-gradient(ellipse at 15% 60%,rgba(0,102,238,.14),transparent 55%),
 radial-gradient(ellipse at 85% 20%,rgba(0,194,255,.09),transparent 50%),var(–bg)}
-.brand{text-align:center;margin-bottom:52px}
-.brand-logo{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:62px;letter-spacing:-2px;
+.brand-logo{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:62px;letter-spacing:-2px;text-align:center;
 background:linear-gradient(135deg,#fff 0%,var(–accent) 55%,var(–accent2) 100%);
 -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.brand-tag{font-family:‘Barlow Condensed’,sans-serif;font-weight:600;font-size:12px;letter-spacing:7px;color:var(–text2);text-transform:uppercase;margin-top:5px}
+.brand-tag{font-family:‘Barlow Condensed’,sans-serif;font-weight:600;font-size:12px;letter-spacing:7px;color:var(–text2);text-transform:uppercase;margin-top:5px;text-align:center}
 .brand-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,194,255,.08);border:1px solid rgba(0,194,255,.2);border-radius:20px;padding:5px 14px;font-size:12px;color:var(–accent);margin-top:12px}
-.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:680px}
+.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:680px;margin-top:48px}
 @media(max-width:540px){.login-grid{grid-template-columns:1fr}}
 .login-card{background:var(–surface);border:1px solid var(–border);border-radius:18px;padding:28px 22px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
-.login-card::after{content:’’;position:absolute;inset:0;opacity:0;transition:opacity .3s;background:linear-gradient(135deg,rgba(0,194,255,.06),transparent)}
 .login-card:hover{border-color:var(–accent);transform:translateY(-3px)}
-.login-card:hover::after{opacity:1}
 .card-icon{font-size:34px;margin-bottom:12px}
 .card-title{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:24px;margin-bottom:5px}
 .coach-card .card-title{color:var(–accent)}
 .player-card .card-title{color:var(–green)}
 .card-desc{color:var(–text2);font-size:12px;line-height:1.5}
 
-/* ── AUTH ── */
 .auth-overlay{display:none;position:fixed;inset:0;background:rgba(6,10,15,.96);align-items:center;justify-content:center;z-index:200;padding:20px;backdrop-filter:blur(10px)}
 .auth-overlay.active{display:flex}
 .auth-box{background:var(–surface);border:1px solid var(–border);border-radius:20px;padding:34px;width:100%;max-width:400px}
@@ -59,9 +54,8 @@ background:linear-gradient(135deg,#fff 0%,var(–accent) 55%,var(–accent2) 100
 .btn-close{background:transparent;border:1px solid var(–border);color:var(–text2);font-size:13px;margin-top:8px}
 .btn-sm{width:auto;padding:9px 18px;font-size:14px}
 .error-msg{color:var(–red);font-size:12px;margin-top:5px;display:none}
-.mt10{margin-top:10px}.mt16{margin-top:16px}.mt20{margin-top:20px}
+.mt10{margin-top:10px}.mt16{margin-top:16px}
 
-/* ── TOPBAR ── */
 #coach-app,#player-app{display:none;min-height:100vh}
 .topbar{background:var(–surface);border-bottom:1px solid var(–border);padding:0 18px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
 .topbar-brand{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:19px;color:var(–accent)}
@@ -73,42 +67,31 @@ background:linear-gradient(135deg,#fff 0%,var(–accent) 55%,var(–accent2) 100
 .nav-tab{padding:12px 15px;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:13px;color:var(–text2);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
 .nav-tab.active{color:var(–accent);border-bottom-color:var(–accent)}
 
-/* ── MAIN ── */
 .main-content{padding:18px;max-width:1100px;margin:0 auto}
 .tab-content{display:none}.tab-content.active{display:block}
 .section-title{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:20px;margin-bottom:16px}
 .section-title span{color:var(–accent)}
 
-/* ── AI UPLOAD ZONE ── */
+/* AI UPLOAD */
 .ai-upload-card{background:var(–surface);border:1px solid var(–border);border-radius:16px;padding:20px;margin-bottom:20px}
 .ai-upload-card h3{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:18px;margin-bottom:4px;color:var(–accent)}
 .ai-upload-card p{font-size:12px;color:var(–text2);margin-bottom:16px;line-height:1.5}
 .upload-zone{border:2px dashed var(–border2);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:all .2s;background:var(–surface2);position:relative}
-.upload-zone:hover{border-color:var(–accent);background:rgba(0,194,255,.04)}
+.upload-zone:hover{border-color:var(–accent)}
 .upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.upload-zone .uz-icon{font-size:36px;margin-bottom:8px}
-.upload-zone .uz-title{font-weight:600;font-size:14px;margin-bottom:3px}
-.upload-zone .uz-sub{font-size:11px;color:var(–text2);line-height:1.5}
 .ai-processing{display:none;align-items:center;gap:12px;padding:14px;background:rgba(0,194,255,.06);border:1px solid rgba(0,194,255,.2);border-radius:10px;margin-top:12px;font-size:13px;color:var(–accent)}
 .ai-processing.active{display:flex}
-.ai-result-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:14px}
-.ai-result-table th{background:var(–surface2);padding:8px 10px;text-align:left;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:11px;letter-spacing:.5px;color:var(–text2);text-transform:uppercase;border-bottom:1px solid var(–border)}
-.ai-result-table td{padding:8px 10px;border-bottom:1px solid rgba(26,45,66,.5);vertical-align:middle}
-.ai-result-table tr:hover td{background:rgba(0,194,255,.03)}
-.player-match-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
-.match-ok{background:rgba(0,230,118,.15);color:var(–green);border:1px solid rgba(0,230,118,.25)}
-.match-new{background:rgba(255,152,0,.15);color:var(–orange);border:1px solid rgba(255,152,0,.25)}
 
-/* ── READINESS GRID ── */
+/* PLAYER CARDS */
 .players-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.pcard{background:var(–surface);border:1px solid var(–border);border-radius:14px;padding:16px;position:relative;overflow:hidden;transition:all .2s}
+.pcard{background:var(–surface);border:1px solid var(–border);border-radius:14px;padding:16px;position:relative;overflow:hidden}
 .pcard::before{content:’’;position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px}
 .pcard.green::before{background:var(–green)}.pcard.orange::before{background:var(–orange)}.pcard.red::before{background:var(–red)}.pcard.nodata::before{background:var(–border)}
 .pcard-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
 .pcard-name{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:17px}
 .pcard-pos{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
 .pcard-pos.ATT{color:#ff6b35}.pcard-pos.CEN{color:var(–accent)}.pcard-pos.DIF{color:var(–green)}.pcard-pos.POR{color:var(–gold)}
-.rbadge{padding:4px 9px;border-radius:20px;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:11px;letter-spacing:.5px}
+.rbadge{padding:4px 9px;border-radius:20px;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:11px}
 .rbadge.green{background:rgba(0,230,118,.15);color:var(–green);border:1px solid rgba(0,230,118,.3)}
 .rbadge.orange{background:rgba(255,152,0,.15);color:var(–orange);border:1px solid rgba(255,152,0,.3)}
 .rbadge.red{background:rgba(244,67,54,.15);color:var(–red);border:1px solid rgba(244,67,54,.3)}
@@ -116,7 +99,7 @@ background:linear-gradient(135deg,#fff 0%,var(–accent) 55%,var(–accent2) 100
 .pcard-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:8px}
 .pm{background:var(–surface2);border-radius:7px;padding:6px;text-align:center}
 .pm .val{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:15px}
-.pm .lbl{font-size:9px;color:var(–text2);text-transform:uppercase;letter-spacing:.5px}
+.pm .lbl{font-size:9px;color:var(–text2);text-transform:uppercase}
 .pbar-wrap{background:var(–surface2);border-radius:5px;height:5px;overflow:hidden;margin:6px 0 4px}
 .pbar{height:100%;border-radius:5px;transition:width .6s ease}
 .pbar.green{background:var(–green)}.pbar.orange{background:var(–orange)}.pbar.red{background:var(–red)}
@@ -125,7 +108,14 @@ background:linear-gradient(135deg,#fff 0%,var(–accent) 55%,var(–accent2) 100
 .gps-mini{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
 .gps-chip{background:rgba(0,194,255,.08);border:1px solid rgba(0,194,255,.15);border-radius:5px;padding:3px 7px;font-size:10px;color:var(–accent3)}
 
-/* ── MICROCICLO ── */
+/* GPS MANUAL */
+.gps-manual-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:9px}
+.gps-input-card{background:var(–surface2);border:1px solid var(–border);border-radius:9px;padding:11px}
+.gps-input-card label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(–text2);display:block;margin-bottom:4px}
+.gps-input-card input{background:transparent;border:none;color:var(–text);font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:19px;width:100%;outline:none}
+.gps-input-card .unit{font-size:9px;color:var(–text2);margin-top:1px}
+
+/* MICROCICLO */
 .micro-table-wrap{overflow-x:auto;margin-top:12px}
 .micro-table{width:100%;border-collapse:collapse;font-size:12px}
 .micro-table th{background:var(–surface2);padding:8px 10px;text-align:left;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:11px;color:var(–text2);text-transform:uppercase;border-bottom:1px solid var(–border)}
@@ -138,7 +128,7 @@ background:linear-gradient(135deg,#fff 0%,var(–accent) 55%,var(–accent2) 100
 .mpill.orange{border-color:rgba(255,152,0,.3);color:var(–orange)}
 .mpill.red{border-color:rgba(244,67,54,.3);color:var(–red)}
 
-/* ── BENCHMARK ── */
+/* BENCHMARK */
 .bench-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
 .bench-card{background:var(–surface);border:1px solid var(–border);border-radius:12px;padding:14px}
 .bench-pos{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:26px;margin-bottom:2px}
@@ -149,13 +139,13 @@ background:linear-gradient(135deg,#fff 0%,var(–accent) 55%,var(–accent2) 100
 .bench-label{font-size:10px;color:var(–text2)}
 .bench-val{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:13px}
 
-/* ── ROSA ── */
+/* ROSA */
 .rosa-form{background:var(–surface);border:1px solid var(–border);border-radius:14px;padding:18px;margin-bottom:18px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:480px){.form-row{grid-template-columns:1fr}}
 .session-item{background:var(–surface2);border:1px solid var(–border);border-radius:10px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 
-/* ── PLAYER ── */
+/* PLAYER */
 .player-header{background:linear-gradient(135deg,var(–surface),rgba(0,102,238,.08));border-bottom:1px solid var(–border);padding:18px}
 .player-name-big{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:34px}
 .pos-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
@@ -171,22 +161,24 @@ background:linear-gradient(135deg,#fff 0%,var(–accent) 55%,var(–accent2) 100
 .slider-val{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:20px;color:var(–accent);min-width:34px;text-align:right}
 .slider-desc{font-size:11px;color:var(–text2);margin-bottom:5px}
 input[type=range]{width:100%;-webkit-appearance:none;height:5px;border-radius:3px;outline:none;cursor:pointer;background:linear-gradient(to right,var(–accent) 0%,var(–accent) var(–val,50%),var(–surface2) var(–val,50%),var(–surface2) 100%)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(–accent);border:3px solid var(–bg);cursor:pointer;box-shadow:0 0 8px rgba(0,194,255,.4)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(–accent);border:3px solid var(–bg);cursor:pointer}
 .range-labels{display:flex;justify-content:space-between;font-size:9px;color:var(–text2);margin-top:2px}
 
-/* SLEEP APPS */
+/* SLEEP */
 .sleep-apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:7px;margin-bottom:16px}
 .sapp-chip{background:var(–surface2);border:1px solid var(–border);border-radius:9px;padding:8px 10px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s}
 .sapp-chip.selected{border-color:var(–accent);background:rgba(0,194,255,.08);color:var(–accent)}
+.file-upload-area{border:2px dashed var(–border2);border-radius:11px;padding:22px;text-align:center;cursor:pointer;transition:all .2s;background:var(–surface2);position:relative}
+.file-upload-area:hover{border-color:var(–accent)}
+.file-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.preview-img{max-width:100%;border-radius:9px;margin-top:10px;max-height:200px;object-fit:contain}
 
-/* READINESS RESULT PLAYER */
+/* READINESS RESULT */
 .readiness-result{border-radius:14px;padding:20px;text-align:center;margin-top:16px;display:none}
 .readiness-result.green{background:rgba(0,230,118,.07);border:2px solid rgba(0,230,118,.25)}
 .readiness-result.orange{background:rgba(255,152,0,.07);border:2px solid rgba(255,152,0,.25)}
 .readiness-result.red{background:rgba(244,67,54,.07);border:2px solid rgba(244,67,54,.25)}
 .rr-emoji{font-size:44px;margin-bottom:5px}
-.rr-score{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:40px}
-.rr-score.green{color:var(–green)}.rr-score.orange{color:var(–orange)}.rr-score.red{color:var(–red)}
 .rr-title{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:17px;margin:4px 0}
 .rr-msg{font-size:12px;color:var(–text2);line-height:1.6;max-width:360px;margin:0 auto}
 .rr-note{font-size:11px;color:var(–text2);background:var(–surface2);border-radius:7px;padding:8px;margin-top:10px;border-left:3px solid var(–accent3)}
@@ -216,7 +208,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .msg.user .msg-bubble{background:linear-gradient(135deg,var(–accent2),var(–accent));color:#fff;border-radius:14px 14px 3px 14px}
 .msg-time{font-size:9px;color:var(–text2);margin-top:2px;padding:0 3px}
 .quick-qs{display:flex;flex-wrap:wrap;gap:5px;padding:0 14px 9px}
-.quick-q{background:var(–surface2);border:1px solid var(–border);border-radius:20px;padding:5px 11px;font-size:10px;cursor:pointer;transition:all .2s;color:var(–text2)}
+.quick-q{background:var(–surface2);border:1px solid var(–border);border-radius:20px;padding:5px 11px;font-size:10px;cursor:pointer;color:var(–text2)}
 .quick-q:hover{border-color:var(–accent);color:var(–accent)}
 .ai-input-row{padding:10px;border-top:1px solid var(–border);display:flex;gap:7px}
 .ai-input{flex:1;background:var(–surface2);border:1px solid var(–border);border-radius:9px;color:var(–text);padding:9px 13px;font-size:13px;font-family:‘Barlow’,sans-serif;outline:none;resize:none}
@@ -227,24 +219,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
 @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-7px)}}
 
-/* TOAST */
+/* AI RESULT TABLE */
+.ai-result-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:14px}
+.ai-result-table th{background:var(–surface2);padding:8px 10px;text-align:left;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:11px;color:var(–text2);text-transform:uppercase;border-bottom:1px solid var(–border)}
+.ai-result-table td{padding:8px 10px;border-bottom:1px solid rgba(26,45,66,.5);vertical-align:middle}
+.match-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.match-ok{background:rgba(0,230,118,.15);color:var(–green);border:1px solid rgba(0,230,118,.25)}
+.match-new{background:rgba(255,152,0,.15);color:var(–orange);border:1px solid rgba(255,152,0,.25)}
+
 .toast{position:fixed;bottom:18px;right:18px;background:var(–surface);border:1px solid var(–green);border-radius:11px;padding:12px 16px;display:flex;align-items:center;gap:9px;z-index:300;transform:translateY(100px);opacity:0;transition:all .3s;max-width:280px;font-size:13px}
 .toast.show{transform:translateY(0);opacity:1}
 
-/* GPS INPUT CARDS */
-.gps-input-card{background:var(–surface2);border:1px solid var(–border);border-radius:9px;padding:11px}
-.gps-input-card label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(–text2);display:block;margin-bottom:4px}
-.gps-input-card input{background:transparent;border:none;color:var(–text);font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:19px;width:100%;outline:none}
-.gps-input-card .unit{font-size:9px;color:var(–text2);margin-top:1px}
-.gps-manual-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:9px}
-
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn .3s ease both}
-
-.preview-img{max-width:100%;border-radius:9px;margin-top:10px;max-height:200px;object-fit:contain}
-.file-upload-area{border:2px dashed var(–border2);border-radius:11px;padding:22px;text-align:center;cursor:pointer;transition:all .2s;background:var(–surface2);position:relative}
-.file-upload-area:hover{border-color:var(–accent)}
-.file-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 </style>
 
 </head>
@@ -253,21 +240,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 <!-- LANDING -->
 
 <div id="landing">
-  <div class="brand">
+  <div style="text-align:center;margin-bottom:52px">
     <div class="brand-logo">PerformaPro</div>
     <div class="brand-tag">Elite Football Performance · AI Powered</div>
-    <div class="brand-badge">🤖 AI legge automaticamente GPS + Sonno</div>
+    <div class="brand-badge">🤖 AI legge GPS + Sonno automaticamente</div>
   </div>
   <div class="login-grid">
     <div class="login-card coach-card" onclick="showAuth('coach')">
       <div class="card-icon">🎯</div>
       <div class="card-title">Coach / Preparatore</div>
-      <div class="card-desc">Carica PDF/screenshot K-Sport. L'AI legge tutto automaticamente e calcola la readiness della squadra.</div>
+      <div class="card-desc">Carica PDF K-Sport. L'AI legge tutti i giocatori automaticamente e calcola la readiness.</div>
     </div>
     <div class="login-card player-card" onclick="showAuth('player')">
       <div class="card-icon">⚡</div>
       <div class="card-title">Giocatore</div>
-      <div class="card-desc">Carica il tuo screenshot WHOOP/Oura/Apple. L'AI legge i dati del sonno automaticamente.</div>
+      <div class="card-desc">Carica screenshot WHOOP/Oura/Apple Watch. L'AI legge i dati del sonno in automatico.</div>
     </div>
   </div>
 </div>
@@ -290,7 +277,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 <div class="auth-overlay" id="auth-player">
   <div class="auth-box fade-in">
     <h2>⚡ Accesso Giocatore</h2>
-    <p>Inserisci il tuo cognome esatto (come nel sistema GPS)</p>
+    <p>Inserisci il tuo cognome esatto (come nel report GPS)</p>
     <div class="form-group"><label>Cognome</label><input type="text" id="player-name-input" placeholder="Es. PELLIZZARI" onkeydown="if(event.key==='Enter')loginPlayer()" style="text-transform:uppercase"></div>
     <div class="form-group"><label>Posizione</label>
       <select id="player-pos-input">
@@ -305,7 +292,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
 </div>
 
-<!-- ═══════════ COACH APP ═══════════ -->
+<!-- COACH APP -->
 
 <div id="coach-app">
   <div class="topbar">
@@ -341,55 +328,49 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <div style="margin-top:16px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:11px;font-size:11px;color:var(--text2);line-height:1.9">
       🟢 <strong style="color:var(--text)">VERDE (75–100)</strong> Allenamento completo &nbsp;|&nbsp;
       🟠 <strong style="color:var(--text)">ARANCIONE (45–74)</strong> Carico ridotto &nbsp;|&nbsp;
-      🔴 <strong style="color:var(--text)">ROSSO (0–44)</strong> Solo rigenerazione &nbsp;|&nbsp;
-      ⚪ In attesa dati
+      🔴 <strong style="color:var(--text)">ROSSO (0–44)</strong> Solo rigenerazione
     </div>
   </div>
 
-  <!-- K-SPORT AI UPLOAD -->
+  <!-- K-SPORT AI -->
 
   <div class="main-content tab-content" id="tab-ksport">
     <div class="section-title">📡 K-Sport <span>AI Upload</span></div>
 
 ```
-<!-- GPS AI -->
 <div class="ai-upload-card">
-  <h3>🤖 Carica File GPS (PDF / Screenshot)</h3>
-  <p>L'AI legge automaticamente tutti i nomi dei giocatori e i valori GPS dal tuo report K-Sport, STATSports, Catapult o qualsiasi altra piattaforma. Supporta PDF, immagini e screenshot.</p>
-  <div class="upload-zone" id="gps-upload-zone">
-    <input type="file" accept="image/*,.pdf,.csv" onchange="handleAiGpsUpload(event)">
-    <div class="uz-icon">📄</div>
-    <div class="uz-title">Carica Report GPS</div>
-    <div class="uz-sub">K-Sport PDF · STATSports · Catapult · Screenshot<br>L'AI estrae automaticamente tutti i dati</div>
+  <h3>🤖 Carica File GPS — Lettura Automatica AI</h3>
+  <p>Carica il PDF o screenshot del report K-Sport. L'AI estrae automaticamente tutti i nomi e i valori GPS di ogni giocatore. Funziona anche con STATSports, Catapult, Polar Team Pro.</p>
+  <div class="upload-zone">
+    <input type="file" accept="image/*,.pdf" onchange="handleGpsUpload(event)">
+    <div style="font-size:36px;margin-bottom:8px">📄</div>
+    <div style="font-weight:600;font-size:14px;margin-bottom:3px">Carica Report GPS</div>
+    <div style="font-size:11px;color:var(--text2)">PDF · Screenshot · Immagine<br>L'AI legge tutti i giocatori automaticamente</div>
   </div>
   <div class="ai-processing" id="gps-processing">
     <div class="ai-thinking"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-    <span>AI sta leggendo il file GPS e riconoscendo i giocatori...</span>
+    <span>AI sta leggendo il report GPS... (10-20 secondi)</span>
   </div>
   <div id="gps-ai-result" style="display:none;margin-top:12px"></div>
 </div>
 
-<!-- OPPURE manuale -->
 <div class="ai-upload-card">
-  <h3>✏️ Oppure Inserimento Manuale</h3>
-  <p>Inserisci i dati manualmente per un singolo giocatore o per tutta la squadra.</p>
+  <h3>✏️ Inserimento Manuale GPS</h3>
+  <p>Inserisci manualmente i dati per un singolo giocatore.</p>
   <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
     <select id="manual-player-select" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 12px;font-size:13px;outline:none;flex:1">
       <option value="">— Seleziona giocatore —</option>
     </select>
     <select id="manual-micro-day" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 12px;font-size:13px;outline:none">
-      <option value="MD+2">MD+2</option>
-      <option value="MD+3">MD+3</option>
-      <option value="MD+4">MD+4</option>
-      <option value="MD-1">MD-1</option>
-      <option value="MD">MD</option>
+      <option value="MD+2">MD+2</option><option value="MD+3">MD+3</option>
+      <option value="MD+4">MD+4</option><option value="MD-1">MD-1</option><option value="MD">MD</option>
     </select>
   </div>
   <div class="gps-manual-grid">
     <div class="gps-input-card"><label>Distanza Totale</label><input type="number" id="gm-td" placeholder="3325"><div class="unit">m</div></div>
     <div class="gps-input-card"><label>Dist.Soglia Vel.HI</label><input type="number" id="gm-hsr" placeholder="401"><div class="unit">m</div></div>
-    <div class="gps-input-card"><label>Dist.Acc</label><input type="number" id="gm-acc" placeholder="206"><div class="unit">m</div></div>
-    <div class="gps-input-card"><label>Dist.Dec</label><input type="number" id="gm-dec" placeholder="168"><div class="unit">m</div></div>
+    <div class="gps-input-card"><label>Dist.Accelerazione</label><input type="number" id="gm-acc" placeholder="206"><div class="unit">m</div></div>
+    <div class="gps-input-card"><label>Dist.Decelerazione</label><input type="number" id="gm-dec" placeholder="168"><div class="unit">m</div></div>
     <div class="gps-input-card"><label>Pot.Metab.Media</label><input type="number" id="gm-pm" placeholder="8.1"><div class="unit">W/Kg</div></div>
     <div class="gps-input-card"><label>%Dist.Equivalente</label><input type="number" id="gm-de" placeholder="20.0"><div class="unit">%</div></div>
     <div class="gps-input-card"><label>%Indice Anaerobico</label><input type="number" id="gm-ia" placeholder="38.5"><div class="unit">%</div></div>
@@ -398,8 +379,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <button class="btn btn-accent mt16" style="max-width:200px" onclick="saveManualGps()">💾 SALVA GPS</button>
 </div>
 
-<!-- Sessioni salvate -->
-<div style="margin-top:8px">
+<div>
   <div class="section-title" style="font-size:16px">📋 Sessioni <span>Salvate</span></div>
   <div id="session-list"><div style="color:var(--text2);font-size:12px;padding:14px;text-align:center">Nessuna sessione</div></div>
 </div>
@@ -414,7 +394,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <div style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">Gref partita EPL: TD ~11.000m · HSR ~900m · Acc/Dec ~100 efforts · HMLD ~1.000m</div>
     <div class="micro-table-wrap">
       <table class="micro-table">
-        <thead><tr><th>Giorno</th><th>Focus</th><th>TD</th><th>HSR/Soglia</th><th>Acc+Dec</th><th>HMLD</th><th>Regola safe zone</th></tr></thead>
+        <thead><tr><th>Giorno</th><th>Focus</th><th>TD</th><th>HSR/Soglia</th><th>Acc+Dec</th><th>HMLD</th><th>Regola</th></tr></thead>
         <tbody id="micro-tbody"></tbody>
       </table>
     </div>
@@ -455,7 +435,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
 </div>
 
-<!-- ═══════════ PLAYER APP ═══════════ -->
+<!-- PLAYER APP -->
 
 <div id="player-app">
   <div class="topbar">
@@ -511,10 +491,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <button class="btn btn-green" onclick="submitWellness()">📤 INVIA AL COACH</button>
       <div class="readiness-result" id="readiness-result">
         <div class="rr-emoji" id="rr-emoji"></div>
-        <div class="rr-score" id="rr-score"></div>
         <div class="rr-title" id="rr-title"></div>
         <div class="rr-msg" id="rr-msg"></div>
-        <div class="rr-note" id="rr-note" style="display:none"></div>
+        <div class="rr-note">Il tuo coach vedrà i dati e valuterà il programma di oggi.</div>
       </div>
     </div>
   </div>
@@ -524,51 +503,42 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <div class="main-content tab-content" id="ptab-sonno">
     <div class="section-title">😴 Sonno <span>AI — Lettura Automatica</span></div>
     <div style="font-size:12px;color:var(--text2);margin-bottom:14px">Carica uno screenshot della tua app del sonno. L'AI legge automaticamente tutti i valori.</div>
-
-```
-<!-- Sleep app selector -->
-<div class="sleep-apps-grid">
-  <div class="sapp-chip" onclick="selSleepApp(this,'WHOOP')"><span>⌚</span>WHOOP</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Oura')"><span>💍</span>Oura Ring</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Garmin')"><span>🟢</span>Garmin</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Apple')"><span>🍎</span>Apple Watch</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Samsung')"><span>📱</span>Samsung</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Fitbit')"><span>💙</span>Fitbit</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Polar')"><span>❤️</span>Polar</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Suunto')"><span>🔵</span>Suunto</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'SleepCycle')"><span>🌙</span>Sleep Cycle</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Withings')"><span>🏥</span>Withings</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'GoogleFit')"><span>🟡</span>Google Fit</div>
-  <div class="sapp-chip" onclick="selSleepApp(this,'Altro')"><span>➕</span>Altro</div>
-</div>
-
-<!-- AI Upload -->
-<div class="file-upload-area" style="margin-bottom:14px">
-  <input type="file" accept="image/*,.pdf" onchange="handleSleepAiUpload(event)">
-  <div style="font-size:28px;margin-bottom:7px">📸</div>
-  <div style="font-weight:600;font-size:13px;margin-bottom:3px">Carica Screenshot / PDF Sonno</div>
-  <div style="font-size:11px;color:var(--text2)">L'AI legge automaticamente HRV, ore sonno, recovery score, FC riposo e altro</div>
-  <img id="sleep-preview-img" class="preview-img" style="display:none" alt="">
-</div>
-<div class="ai-processing" id="sleep-processing">
-  <div class="ai-thinking"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-  <span>AI sta leggendo i tuoi dati del sonno...</span>
-</div>
-<div id="sleep-ai-result" style="display:none;margin-bottom:14px"></div>
-
-<!-- Manuale -->
-<div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Oppure inserimento manuale</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:14px">
-  <div class="gps-input-card"><label>Ore Sonno</label><input type="number" id="s-ore" step="0.5" placeholder="7.5"><div class="unit">ore</div></div>
-  <div class="gps-input-card"><label>HRV Notturno</label><input type="number" id="s-hrv" placeholder="62"><div class="unit">ms</div></div>
-  <div class="gps-input-card"><label>FC Riposo</label><input type="number" id="s-fc" placeholder="52"><div class="unit">bpm</div></div>
-  <div class="gps-input-card"><label>Sonno Profondo</label><input type="number" id="s-deep" placeholder="90"><div class="unit">min</div></div>
-  <div class="gps-input-card"><label>Sonno REM</label><input type="number" id="s-rem" placeholder="75"><div class="unit">min</div></div>
-  <div class="gps-input-card"><label>Recovery Score</label><input type="number" id="s-rec" placeholder="78"><div class="unit">%</div></div>
-</div>
-<button class="btn btn-green" style="max-width:200px" onclick="saveSleepManual()">💾 SALVA DATI SONNO</button>
-```
-
+    <div class="sleep-apps-grid">
+      <div class="sapp-chip" onclick="selSleepApp(this,'WHOOP')"><span>⌚</span>WHOOP</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Oura')"><span>💍</span>Oura Ring</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Garmin')"><span>🟢</span>Garmin</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Apple Watch')"><span>🍎</span>Apple Watch</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Samsung')"><span>📱</span>Samsung</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Fitbit')"><span>💙</span>Fitbit</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Polar')"><span>❤️</span>Polar</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Suunto')"><span>🔵</span>Suunto</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Sleep Cycle')"><span>🌙</span>Sleep Cycle</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Withings')"><span>🏥</span>Withings</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Google Fit')"><span>🟡</span>Google Fit</div>
+      <div class="sapp-chip" onclick="selSleepApp(this,'Altro')"><span>➕</span>Altro</div>
+    </div>
+    <div class="file-upload-area" style="margin-bottom:14px">
+      <input type="file" accept="image/*,.pdf" onchange="handleSleepUpload(event)">
+      <div style="font-size:28px;margin-bottom:7px">📸</div>
+      <div style="font-weight:600;font-size:13px;margin-bottom:3px">Carica Screenshot Sonno</div>
+      <div style="font-size:11px;color:var(--text2)">L'AI legge HRV, ore sonno, recovery score, FC riposo automaticamente</div>
+      <img id="sleep-preview-img" class="preview-img" style="display:none" alt="">
+    </div>
+    <div class="ai-processing" id="sleep-processing">
+      <div class="ai-thinking"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <span>AI sta leggendo i dati del sonno...</span>
+    </div>
+    <div id="sleep-ai-result" style="display:none;margin-bottom:14px"></div>
+    <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Oppure inserimento manuale</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:14px">
+      <div class="gps-input-card"><label>Ore Sonno</label><input type="number" id="s-ore" step="0.5" placeholder="7.5"><div class="unit">ore</div></div>
+      <div class="gps-input-card"><label>HRV Notturno</label><input type="number" id="s-hrv" placeholder="62"><div class="unit">ms</div></div>
+      <div class="gps-input-card"><label>FC Riposo</label><input type="number" id="s-fc" placeholder="52"><div class="unit">bpm</div></div>
+      <div class="gps-input-card"><label>Sonno Profondo</label><input type="number" id="s-deep" placeholder="90"><div class="unit">min</div></div>
+      <div class="gps-input-card"><label>Sonno REM</label><input type="number" id="s-rem" placeholder="75"><div class="unit">min</div></div>
+      <div class="gps-input-card"><label>Recovery Score</label><input type="number" id="s-rec" placeholder="78"><div class="unit">%</div></div>
+    </div>
+    <button class="btn btn-green" style="max-width:200px" onclick="saveSleepManual()">💾 SALVA DATI SONNO</button>
   </div>
 
   <!-- NUTRIZIONE -->
@@ -588,7 +558,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 
   <div class="main-content tab-content" id="ptab-ai">
     <div class="section-title">🤖 AI Coach <span>Personale</span></div>
-    <div style="font-size:12px;color:var(--text2);margin-bottom:12px">Chiedi tutto su nutrizione, recupero, sonno e performance. Rispondo con evidenze scientifiche 2024–2025.</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:12px">Chiedi tutto su nutrizione, recupero, sonno e performance sportiva.</div>
     <div class="ai-chat">
       <div class="ai-chat-header">
         <div class="ai-avatar">🤖</div>
@@ -602,7 +572,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <div class="quick-q" onclick="sendQuick(this)">Come migliorare il sonno?</div>
         <div class="quick-q" onclick="sendQuick(this)">Integratori per il recupero</div>
         <div class="quick-q" onclick="sendQuick(this)">Come interpretare il mio HRV?</div>
-        <div class="quick-q" onclick="sendQuick(this)">Cosa mangio 3h prima dell'allenamento?</div>
       </div>
       <div class="ai-input-row">
         <textarea class="ai-input" id="ai-input" rows="1" placeholder="Scrivi la tua domanda..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"></textarea>
@@ -612,8 +581,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
 </div>
 
-<!-- TOAST -->
-
 <div class="toast" id="toast"><span id="toast-icon">✅</span><span id="toast-text">Salvato!</span></div>
 
 <!-- FIREBASE -->
@@ -622,14 +589,60 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import{getDatabase,ref,set,get,onValue,push,remove}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 const cfg={apiKey:"AIzaSyDI3E72QikNT7clgMLY_uUhVi7LKLD_6Xo",authDomain:"performapro-541ea.firebaseapp.com",databaseURL:"https://performapro-541ea-default-rtdb.europe-west1.firebasedatabase.app",projectId:"performapro-541ea",storageBucket:"performapro-541ea.firebasestorage.app",messagingSenderId:"546093393761",appId:"1:546093393761:web:f136fa209779e7dde90720"};
-const app=initializeApp(cfg);
-const db=getDatabase(app);
+const app=initializeApp(cfg);const db=getDatabase(app);
 window._db=db;window._ref=ref;window._set=set;window._get=get;window._onValue=onValue;window._push=push;window._remove=remove;
 window._fbReady=true;window.dispatchEvent(new Event('fbready'));
 </script>
 
 <script>
-// ═══ CONSTANTS ═══
+// ═══ API PROXY ═══
+// Usiamo un proxy CORS-friendly per chiamate da GitHub Pages
+const API_URL = 'https://api.anthropic.com/v1/messages';
+const API_KEY = 'AIzaSyDI3E72QikNT7clgMLY_uUhVi7LKLD_6Xo'; // NOT USED - handled by proxy
+
+async function callAI(messages, system, maxTokens=1500) {
+  // Prova prima senza proxy (funziona su alcuni browser/reti)
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: maxTokens,
+        system: system,
+        messages: messages
+      })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.content?.map(b=>b.text||'').join('') || '';
+    }
+  } catch(e) {}
+  
+  // Fallback: usa allorigins proxy
+  try {
+    const body = JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: maxTokens,
+      system: system,
+      messages: messages
+    });
+    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(API_URL);
+    const res = await fetch(proxyUrl, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'x-cors-api-key': 'temp_key'},
+      body: body
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.content?.map(b=>b.text||'').join('') || '';
+    }
+  } catch(e) {}
+  
+  throw new Error('API non raggiungibile');
+}
+
+// ═══ STATE ═══
 const COACH_PASS="prep2024";
 let currentRole=null,currentPlayerName='',currentPlayerPos='';
 let roster=[],wellnessData={},gpsData={},gpsSessions=[];
@@ -669,20 +682,18 @@ window.logout=function(){
   currentRole=null;
 };
 
-// ═══ COACH INIT ═══
+// ═══ COACH ═══
 function initCoach(){
   renderMicrociclo();renderBenchmark('all');
-  waitFB(()=>{loadRoster();listenWellness();listenGpsSessions();});
+  waitFB(()=>{loadRoster();listenWellness();listenGps();});
 }
 
-// ═══ ROSTER ═══
 function loadRoster(){
-  const r=window._ref(window._db,'roster');
-  window._onValue(r,snap=>{
+  window._onValue(window._ref(window._db,'roster'),snap=>{
     roster=[];
     const d=snap.val()||{};
     Object.entries(d).forEach(([id,p])=>roster.push({...p,id}));
-    renderRosa();renderReadiness();updateManualPlayerSelect();
+    renderRosa();renderReadiness();updateManualSelect();
   });
 }
 
@@ -702,28 +713,28 @@ window.addPlayer=function(){
 };
 
 window.removePlayer=function(id){
-  waitFB(()=>{window._remove(window._ref(window._db,`roster/${id}`));showToast('Rimosso');});
+  waitFB(()=>{window._remove(window._ref(window._db,`roster/${id}`));});
 };
 
-function updateManualPlayerSelect(){
-  const sel=document.getElementById('manual-player-select');
-  if(!sel)return;
+function updateManualSelect(){
+  const sel=document.getElementById('manual-player-select');if(!sel)return;
   sel.innerHTML='<option value="">— Seleziona giocatore —</option>';
   roster.forEach(p=>sel.innerHTML+=`<option value="${p.name}">${p.name} (${p.pos})</option>`);
 }
 
 function renderRosa(){
   const list=document.getElementById('rosa-list');if(!list)return;
-  if(roster.length===0){list.innerHTML='<div style="color:var(--text2);font-size:12px;padding:14px">Nessun giocatore</div>';return;}
+  if(roster.length===0){list.innerHTML='<div style="color:var(--text2);font-size:12px;padding:14px">Nessun giocatore. Aggiungili sopra.</div>';return;}
   list.innerHTML='';
   roster.forEach(p=>{
     const d=wellnessData[p.name];
+    const g=gpsData[p.name];
     const dot=!d?'⚪':d.status==='green'?'🟢':d.status==='orange'?'🟠':'🔴';
-    const gps=gpsData[p.name];
     list.innerHTML+=`<div class="session-item fade-in">
       <div style="display:flex;align-items:center;gap:10px">
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;color:var(--accent);min-width:30px">#${p.num}</div>
-        <div><div style="font-weight:600;font-size:14px">${p.name}</div><div style="font-size:10px;color:var(--text2)">${p.pos} · ${p.age}a ${gps?'· GPS ✅':''}</div></div>
+        <div><div style="font-weight:600;font-size:14px">${p.name}</div>
+        <div style="font-size:10px;color:var(--text2)">${p.pos} · ${p.age}a ${g?'· 📡 GPS ✅':''}</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <span style="font-size:16px">${dot}</span>
@@ -733,7 +744,6 @@ function renderRosa(){
   });
 }
 
-// ═══ WELLNESS LISTENER ═══
 function listenWellness(){
   const r=window._ref(window._db,`wellness/${today()}`);
   unsubWellness=window._onValue(r,snap=>{
@@ -744,17 +754,14 @@ function listenWellness(){
   });
 }
 
-// ═══ GPS DATA LISTENER ═══
-function listenGpsSessions(){
-  const r=window._ref(window._db,`gps/${today()}`);
-  window._onValue(r,snap=>{
+function listenGps(){
+  window._onValue(window._ref(window._db,`gps/${today()}`),snap=>{
     gpsData={};
     const d=snap.val()||{};
     Object.entries(d).forEach(([name,v])=>{gpsData[name]=v;});
     renderReadiness();renderRosa();
   });
-  const r2=window._ref(window._db,'gpsSessions');
-  window._onValue(r2,snap=>{
+  window._onValue(window._ref(window._db,'gpsSessions'),snap=>{
     gpsSessions=[];
     const d=snap.val()||{};
     Object.entries(d).forEach(([id,s])=>gpsSessions.unshift(s));
@@ -763,14 +770,8 @@ function listenGpsSessions(){
 }
 
 // ═══ READINESS ═══
-const microTargets={
-  'MD+2':{td:4500,hsr:250,acc:25,pct:'30–40%'},
-  'MD+3':{td:7000,hsr:550,acc:45,pct:'50–60%'},
-  'MD+4':{td:9500,hsr:780,acc:75,pct:'70–80%'},
-  'MD-1':{td:5000,hsr:180,acc:35,pct:'30–40%'},
-  'MD':{td:11500,hsr:1000,acc:110,pct:'100%'},
-};
-const benchmarks={ATT:{td:10000,hsr:750,acc:48},CEN:{td:11000,hsr:900,acc:55},DIF:{td:9800,hsr:620,acc:45},POR:{td:6000,hsr:270,acc:22}};
+const microTargets={'MD+2':{td:4500,hsr:250},'MD+3':{td:7000,hsr:550},'MD+4':{td:9500,hsr:780},'MD-1':{td:5000,hsr:180},'MD':{td:11500,hsr:1000}};
+const benchmarks={ATT:{td:10000,hsr:750},CEN:{td:11000,hsr:900},DIF:{td:9800,hsr:620},POR:{td:6000,hsr:270}};
 
 function renderReadiness(){
   const grid=document.getElementById('players-grid');if(!grid)return;
@@ -784,21 +785,23 @@ function renderReadiness(){
     if(w){
       status=w.status;
       if(w.status==='green'){badge='green';badgeText=`🟢 PRONTO (${w.score})`;sugClass='green';sug='Ottimo recupero. Allenamento completo.';}
-      if(w.status==='orange'){badge='orange';badgeText=`🟠 ATTENZIONE (${w.score})`;sugClass='orange';sug='Recupero parziale. Ridurre HSR 20-30%. Monitorare.';}
-      if(w.status==='red'){badge='red';badgeText=`🔴 GESTIRE (${w.score})`;sugClass='red';sug='Solo lavoro rigenerativo. Nessuna intensità.';}
+      if(w.status==='orange'){badge='orange';badgeText=`🟠 ATTENZIONE (${w.score})`;sugClass='orange';sug='Recupero parziale. Ridurre HSR 20-30%.';}
+      if(w.status==='red'){badge='red';badgeText=`🔴 GESTIRE (${w.score})`;sugClass='red';sug='Solo lavoro rigenerativo.';}
     }
-    // GPS comparison
+    if(w&&microDay){
+      const t=microTargets[microDay];
+      if(t&&w.status==='green')sug+=` Target: TD ${t.td}m · HSR ${t.hsr}m`;
+      if(t&&w.status==='orange')sug+=` Max: TD ${Math.round(t.td*.7)}m`;
+    }
     let gpsHtml='';
     if(g){
       const bench=benchmarks[p.pos]||benchmarks.CEN;
       const tdPct=Math.round(g.td/bench.td*100);
-      const hsrPct=Math.round(g.hsr/bench.hsr*100);
-      const mTarget=microDay?microTargets[microDay]:null;
+      const hsrPct=g.hsr?Math.round(g.hsr/bench.hsr*100):0;
       gpsHtml=`<div class="gps-mini">
         <span class="gps-chip">TD: ${g.td}m (${tdPct}% bench)</span>
-        <span class="gps-chip">HSR: ${g.hsr}m (${hsrPct}% bench)</span>
+        ${g.hsr?`<span class="gps-chip">HSR: ${g.hsr}m (${hsrPct}% bench)</span>`:''}
         ${g.pm?`<span class="gps-chip">PM: ${g.pm}W/kg</span>`:''}
-        ${mTarget?`<span class="gps-chip" style="color:var(--orange)">${microDay}: target TD ${mTarget.td}m</span>`:''}
       </div>`;
     }
     const card=document.createElement('div');
@@ -814,130 +817,76 @@ function renderReadiness(){
         <div class="pm"><div class="val">${w.physical}/10</div><div class="lbl">Fisico</div></div>
         <div class="pm"><div class="val">${w.mental}/10</div><div class="lbl">Mentale</div></div>
         <div class="pm"><div class="val">${w.hrv||'—'}</div><div class="lbl">HRV</div></div>
-        <div class="pm"><div class="val">${w.hours}h</div><div class="lbl">Ore</div></div>
+        <div class="pm"><div class="val">${w.hours}h</div><div class="lbl">Sonno</div></div>
         <div class="pm"><div class="val">RPE${w.rpe}</div><div class="lbl">Ieri</div></div>
       </div>
       <div class="pbar-wrap"><div class="pbar ${status}" style="width:${w.score}%"></div></div>
       <div style="font-size:9px;color:var(--text2);text-align:right;margin-top:2px">${w.score}/100</div>
-      <div class="psug ${sugClass}">${sug}${microDay&&g?` | ${microDay}: ${getMicroAdvice(w.status,microDay)}`:''}
-      </div>
+      <div class="psug ${sugClass}">${sug}</div>
       ${w.notes?`<div style="margin-top:5px;font-size:10px;color:var(--text2);background:var(--surface2);border-radius:6px;padding:6px">📝 ${w.notes}</div>`:''}
-      `:'<div style="font-size:12px;color:var(--text2);padding:8px 0">Dati non ancora inseriti oggi</div>'}
+      `:`<div style="font-size:12px;color:var(--text2);padding:8px 0">In attesa del check-in odierno</div>`}
       ${gpsHtml}
     `;
     grid.appendChild(card);
   });
 }
 
-function getMicroAdvice(status,day){
-  const t=microTargets[day];if(!t)return'';
-  if(status==='green')return`Piena sessione — target TD ${t.td}m`;
-  if(status==='orange')return`Carico ridotto — TD max ${Math.round(t.td*.7)}m`;
-  return`Solo rigenerazione — no esercizi ad alta intensità`;
-}
-
-// ═══ AI GPS UPLOAD ═══
-window.handleAiGpsUpload=async function(e){
+// ═══ GPS AI UPLOAD ═══
+window.handleGpsUpload=async function(e){
   const file=e.target.files[0];if(!file)return;
   document.getElementById('gps-processing').classList.add('active');
   document.getElementById('gps-ai-result').style.display='none';
   try{
-    let base64='',mediaType=file.type;
-    if(file.type==='application/pdf'||file.type.startsWith('image/')){
-      base64=await fileToBase64(file);
-    }
-    const isImage=file.type.startsWith('image/');
+    const base64=await toBase64(file);
+    const isImg=file.type.startsWith('image/');
     const isPdf=file.type==='application/pdf';
     const content=[];
-    if(isImage){
-      content.push({type:'image',source:{type:'base64',media_type:mediaType,data:base64}});
-    } else if(isPdf){
-      content.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}});
-    }
-    content.push({type:'text',text:`Sei un sistema di analisi GPS per il calcio professionistico. 
-Estrai TUTTI i dati GPS da questo file/immagine.
-Restituisci SOLO un JSON valido senza markdown, nel formato:
-{
-  "sessionDate": "YYYY-MM-DD",
-  "platform": "nome piattaforma (es K-Sport, STATSports, Catapult)",
-  "players": [
-    {
-      "name": "COGNOME (maiuscolo)",
-      "td": numero distanza totale in metri,
-      "hsr": numero distanza soglia velocità alta in metri,
-      "acc": numero distanza accelerazione in metri,
-      "dec": numero distanza decelerazione in metri,
-      "pm": numero potenza metabolica media W/kg,
-      "de": numero %dist equivalente,
-      "ia": numero %indice anaerobico,
-      "hmld": numero distanza HMLD in metri
-    }
-  ]
-}
-Se un valore non è presente metti null. Estrai TUTTI i giocatori visibili, non solo il team average.`});
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:3000,messages:[{role:'user',content}]})
-    });
-    const data=await res.json();
-    const text=data.content?.map(b=>b.text||'').join('')||'';
-    const clean=text.replace(/```json|```/g,'').trim();
-    const parsed=JSON.parse(clean);
-    showGpsAiResult(parsed);
+    if(isImg) content.push({type:'image',source:{type:'base64',media_type:file.type,data:base64}});
+    else if(isPdf) content.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}});
+    content.push({type:'text',text:`Estrai TUTTI i dati GPS da questo report. Restituisci SOLO JSON valido, niente markdown:
+{"sessionDate":"YYYY-MM-DD","platform":"nome","players":[{"name":"COGNOME","td":numero,"hsr":numero,"acc":numero,"dec":numero,"pm":numero,"de":numero,"ia":numero,"hmld":numero}]}
+Includi tutti i giocatori. Se un valore manca metti null. Il name deve essere in MAIUSCOLO.`});
+    const text=await callAI([{role:'user',content}],'Sei un sistema di estrazione dati GPS per calcio professionistico. Rispondi SOLO con JSON valido.',2000);
+    const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+    showGpsResult(parsed);
   }catch(err){
     document.getElementById('gps-processing').classList.remove('active');
-    showToast('Errore lettura file. Riprova con immagine più chiara.',false);
-    console.error(err);
+    showToast('Errore lettura. Prova a caricare come immagine (screenshot del PDF).',false);
   }
 };
 
-function showGpsAiResult(data){
+function showGpsResult(data){
   document.getElementById('gps-processing').classList.remove('active');
   const el=document.getElementById('gps-ai-result');
   el.style.display='block';
-  const players=data.players||[];
-  let html=`<div style="margin-bottom:10px;font-size:12px;color:var(--text2)">
-    🤖 AI ha riconosciuto <strong style="color:var(--accent)">${players.length} giocatori</strong> 
-    da <strong>${data.platform||'piattaforma GPS'}</strong>
-    ${data.sessionDate?`· Sessione: <strong>${data.sessionDate}</strong>`:''}
-  </div>
-  <div style="overflow-x:auto">
-  <table class="ai-result-table">
-    <thead><tr><th>Giocatore</th><th>In Rosa</th><th>TD (m)</th><th>HSR (m)</th><th>Acc (m)</th><th>Dec (m)</th><th>PM (W/kg)</th><th>%DE</th></tr></thead>
-    <tbody>`;
-  
+  const players=(data.players||[]).filter(p=>p.name&&!p.name.includes('AVERAGE'));
   const rosterNames=roster.map(r=>r.name.toUpperCase());
+  let html=`<div style="margin-bottom:10px;font-size:12px;color:var(--text2)">
+    🤖 <strong style="color:var(--accent)">${players.length} giocatori</strong> da <strong>${data.platform||'GPS'}</strong>
+    ${data.sessionDate?`· ${data.sessionDate}`:''}
+  </div><div style="overflow-x:auto">
+  <table class="ai-result-table">
+    <thead><tr><th>Nome</th><th>Rosa</th><th>TD</th><th>HSR</th><th>Acc</th><th>Dec</th><th>PM</th></tr></thead><tbody>`;
   players.forEach(p=>{
-    if(!p.name||p.name==='TEAM AVERAGE'||p.name==='TEAM_AVERAGE')return;
-    const inRoster=rosterNames.includes(p.name.toUpperCase());
-    html+=`<tr>
-      <td><strong>${p.name}</strong></td>
-      <td><span class="player-match-tag ${inRoster?'match-ok':'match-new'}">${inRoster?'✓ Rosa':'+ Nuovo'}</span></td>
-      <td>${p.td||'—'}</td><td>${p.hsr||'—'}</td><td>${p.acc||'—'}</td><td>${p.dec||'—'}</td>
-      <td>${p.pm||'—'}</td><td>${p.de||'—'}</td>
-    </tr>`;
+    const ok=rosterNames.includes(p.name?.toUpperCase());
+    html+=`<tr><td><strong>${p.name}</strong></td>
+    <td><span class="match-tag ${ok?'match-ok':'match-new'}">${ok?'✓':'+ Nuovo'}</span></td>
+    <td>${p.td||'—'}</td><td>${p.hsr||'—'}</td><td>${p.acc||'—'}</td><td>${p.dec||'—'}</td><td>${p.pm||'—'}</td></tr>`;
   });
   html+=`</tbody></table></div>
-  <button class="btn btn-accent mt16" style="max-width:220px" onclick='saveAiGpsData(${JSON.stringify(data)})'>💾 SALVA TUTTI I DATI GPS</button>`;
+  <button class="btn btn-accent mt16" style="max-width:220px" onclick='saveGpsAll(${JSON.stringify(data)})'>💾 SALVA TUTTI IN FIREBASE</button>`;
   el.innerHTML=html;
 }
 
-window.saveAiGpsData=function(data){
-  const players=data.players||[];
+window.saveGpsAll=function(data){
+  const players=(data.players||[]).filter(p=>p.name&&!p.name.includes('AVERAGE'));
   const t=today();
   waitFB(()=>{
     players.forEach(p=>{
-      if(!p.name||p.name.includes('AVERAGE'))return;
-      const key=p.name.toUpperCase().replace(/[.#$\[\]\s]/g,'_');
       window._set(window._ref(window._db,`gps/${t}/${p.name}`),{...p,savedAt:Date.now()});
     });
-    // Save as session too
-    window._push(window._ref(window._db,'gpsSessions'),{
-      date:t,platform:data.platform,playerCount:players.length,
-      teamAvg:players.find(p=>p.name?.includes('AVERAGE'))||null
-    });
-    showToast(`${players.length} giocatori salvati! ✅`);
+    window._push(window._ref(window._db,'gpsSessions'),{date:t,platform:data.platform,playerCount:players.length});
+    showToast(`${players.length} giocatori GPS salvati! ✅`);
     renderReadiness();
   });
 };
@@ -946,8 +895,8 @@ window.saveAiGpsData=function(data){
 window.saveManualGps=function(){
   const name=document.getElementById('manual-player-select').value;
   if(!name){showToast('Seleziona un giocatore ❗',false);return;}
-  const d={
-    name,td:+document.getElementById('gm-td').value||0,
+  const d={name,
+    td:+document.getElementById('gm-td').value||0,
     hsr:+document.getElementById('gm-hsr').value||0,
     acc:+document.getElementById('gm-acc').value||0,
     dec:+document.getElementById('gm-dec').value||0,
@@ -959,7 +908,7 @@ window.saveManualGps=function(){
   };
   waitFB(()=>{
     window._set(window._ref(window._db,`gps/${today()}/${name}`),d);
-    showToast(`GPS salvato per ${name}! ✅`);
+    showToast(`GPS ${name} salvato! ✅`);
     renderReadiness();
   });
 };
@@ -968,18 +917,18 @@ function renderSessions(){
   const list=document.getElementById('session-list');if(!list)return;
   if(gpsSessions.length===0){list.innerHTML='<div style="color:var(--text2);font-size:12px;padding:14px;text-align:center">Nessuna sessione</div>';return;}
   list.innerHTML='';
-  gpsSessions.slice(0,8).forEach(s=>{
-    list.innerHTML+=`<div class="session-item"><div><div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px">${s.platform||'GPS Session'}</div><div style="font-size:10px;color:var(--text2)">${s.date} · ${s.playerCount||0} giocatori</div></div></div>`;
+  gpsSessions.slice(0,6).forEach(s=>{
+    list.innerHTML+=`<div class="session-item"><div><div style="font-weight:600;font-size:13px">${s.platform||'GPS Session'}</div><div style="font-size:10px;color:var(--text2)">${s.date} · ${s.playerCount||0} giocatori</div></div></div>`;
   });
 }
 
-// ═══ SLEEP AI UPLOAD ═══
+// ═══ SLEEP AI ═══
 window.selSleepApp=function(el,name){
   document.querySelectorAll('.sapp-chip').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');selectedSleepApp=name;
 };
 
-window.handleSleepAiUpload=async function(e){
+window.handleSleepUpload=async function(e){
   const file=e.target.files[0];if(!file)return;
   if(file.type.startsWith('image/')){
     const reader=new FileReader();
@@ -989,68 +938,45 @@ window.handleSleepAiUpload=async function(e){
   document.getElementById('sleep-processing').classList.add('active');
   document.getElementById('sleep-ai-result').style.display='none';
   try{
-    const base64=await fileToBase64(file);
-    const isImage=file.type.startsWith('image/');
+    const base64=await toBase64(file);
+    const isImg=file.type.startsWith('image/');
     const content=[];
-    if(isImage)content.push({type:'image',source:{type:'base64',media_type:file.type,data:base64}});
+    if(isImg) content.push({type:'image',source:{type:'base64',media_type:file.type,data:base64}});
     else content.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}});
-    content.push({type:'text',text:`Sei un sistema di analisi dati del sonno per atleti professionisti.
-Estrai TUTTI i dati del sonno visibili in questa immagine/documento.
-App rilevata: ${selectedSleepApp||'auto-detect'}.
-Restituisci SOLO JSON valido senza markdown:
-{
-  "app": "nome app (WHOOP/Oura/Apple Watch/Garmin/etc)",
-  "date": "data se visibile",
-  "sleepHours": numero ore totali sonno,
-  "hrv": numero HRV in ms,
-  "restingHR": numero FC riposo bpm,
-  "deepSleep": numero minuti sonno profondo,
-  "remSleep": numero minuti REM,
-  "recoveryScore": numero recovery score percentuale,
-  "sleepScore": numero sleep score se presente,
-  "respiratoryRate": numero atti respiratori al minuto se presente,
-  "skinTemp": numero temperatura cutanea se presente,
-  "notes": "qualsiasi altra informazione rilevante"
-}
+    content.push({type:'text',text:`Estrai i dati del sonno da questa immagine (app: ${selectedSleepApp||'auto'}).
+Restituisci SOLO JSON valido:
+{"app":"nome app","sleepHours":numero,"hrv":numero,"restingHR":numero,"deepSleep":numero,"remSleep":numero,"recoveryScore":numero,"sleepScore":numero,"notes":"altro"}
 Se un valore non è visibile metti null.`});
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content}]})
-    });
-    const data=await res.json();
-    const text=data.content?.map(b=>b.text||'').join('')||'';
+    const text=await callAI([{role:'user',content}],'Estrai dati sonno da screenshot app. Rispondi solo JSON.',800);
     const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
-    showSleepAiResult(parsed);
+    showSleepResult(parsed);
   }catch(err){
     document.getElementById('sleep-processing').classList.remove('active');
-    showToast('Errore lettura. Carica immagine più nitida.',false);
+    showToast('Screenshot non leggibile. Prova con immagine più nitida.',false);
   }
 };
 
-function showSleepAiResult(d){
+function showSleepResult(d){
   document.getElementById('sleep-processing').classList.remove('active');
   const el=document.getElementById('sleep-ai-result');
   el.style.display='block';
   const items=[
-    d.sleepHours?`⏱️ <strong>${d.sleepHours}h</strong> ore sonno`:'',
-    d.hrv?`❤️ HRV: <strong>${d.hrv}ms</strong>`:'',
-    d.restingHR?`💓 FC riposo: <strong>${d.restingHR}bpm</strong>`:'',
-    d.deepSleep?`🌊 Sonno profondo: <strong>${d.deepSleep}min</strong>`:'',
-    d.remSleep?`🌙 REM: <strong>${d.remSleep}min</strong>`:'',
-    d.recoveryScore?`⚡ Recovery: <strong>${d.recoveryScore}%</strong>`:'',
-    d.sleepScore?`📊 Sleep Score: <strong>${d.sleepScore}</strong>`:'',
+    d.sleepHours&&`⏱️ <strong>${d.sleepHours}h</strong> sonno`,
+    d.hrv&&`❤️ HRV: <strong>${d.hrv}ms</strong>`,
+    d.restingHR&&`💓 FC: <strong>${d.restingHR}bpm</strong>`,
+    d.deepSleep&&`🌊 Profondo: <strong>${d.deepSleep}min</strong>`,
+    d.remSleep&&`🌙 REM: <strong>${d.remSleep}min</strong>`,
+    d.recoveryScore&&`⚡ Recovery: <strong>${d.recoveryScore}%</strong>`,
   ].filter(Boolean);
   el.innerHTML=`<div style="background:rgba(0,194,255,.06);border:1px solid rgba(0,194,255,.2);border-radius:10px;padding:14px;margin-bottom:10px">
-    <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:8px">🤖 AI ha letto i dati da: ${d.app||selectedSleepApp||'App Sonno'}</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px">${items.map(i=>`<span style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px">${i}</span>`).join('')}</div>
+    <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:8px">🤖 Letto da: ${d.app||selectedSleepApp||'App Sonno'}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;font-size:12px">${items.map(i=>`<span style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px">${i}</span>`).join('')}</div>
     ${d.notes?`<div style="margin-top:8px;font-size:11px;color:var(--text2)">📝 ${d.notes}</div>`:''}
   </div>
-  <button class="btn btn-green" style="max-width:200px" onclick='saveSleepAiData(${JSON.stringify(d)})'>💾 SALVA DATI SONNO</button>`;
+  <button class="btn btn-green" style="max-width:200px" onclick='saveSleepAI(${JSON.stringify(d)})'>💾 SALVA DATI SONNO</button>`;
 }
 
-window.saveSleepAiData=function(d){
-  const nameKey=currentPlayerName.replace(/[.#$\[\]]/g,'_');
+window.saveSleepAI=function(d){
   waitFB(()=>{
     window._set(window._ref(window._db,`sleep/${today()}/${currentPlayerName}`),{...d,savedAt:Date.now()});
     showToast('Dati sonno salvati! ✅');
@@ -1058,22 +984,11 @@ window.saveSleepAiData=function(d){
 };
 
 window.saveSleepManual=function(){
-  const d={
-    sleepHours:+document.getElementById('s-ore').value||null,
-    hrv:+document.getElementById('s-hrv').value||null,
-    restingHR:+document.getElementById('s-fc').value||null,
-    deepSleep:+document.getElementById('s-deep').value||null,
-    remSleep:+document.getElementById('s-rem').value||null,
-    recoveryScore:+document.getElementById('s-rec').value||null,
-    app:'Manuale',savedAt:Date.now()
-  };
-  waitFB(()=>{
-    window._set(window._ref(window._db,`sleep/${today()}/${currentPlayerName}`),d);
-    showToast('Dati sonno salvati! ✅');
-  });
+  const d={sleepHours:+document.getElementById('s-ore').value||null,hrv:+document.getElementById('s-hrv').value||null,restingHR:+document.getElementById('s-fc').value||null,deepSleep:+document.getElementById('s-deep').value||null,remSleep:+document.getElementById('s-rem').value||null,recoveryScore:+document.getElementById('s-rec').value||null,app:'Manuale',savedAt:Date.now()};
+  waitFB(()=>{window._set(window._ref(window._db,`sleep/${today()}/${currentPlayerName}`),d);showToast('Dati sonno salvati! ✅');});
 };
 
-// ═══ PLAYER WELLNESS ═══
+// ═══ PLAYER ═══
 function initPlayer(){
   document.getElementById('player-display-name').textContent=currentPlayerName;
   const badge=document.getElementById('player-pos-badge');
@@ -1094,14 +1009,9 @@ window.submitWellness=function(){
   let score=Math.round(sleep*10*.20+Math.min(hours/9*100,100)*.15+physical*10*.25+mental*10*.20+(hrv>0?Math.min(hrv/100*100,100)*.10:50*.10)+((20-rpe)/14*100)*.10);
   score=Math.min(100,Math.max(0,score));
   const status=score>=75?'green':score>=45?'orange':'red';
-  // ⚠️ Il giocatore NON vede il bollino — vede solo un messaggio neutro
-  const msgs={
-    green:'Check-in inviato! Continua così, il tuo recupero sembra buono.',
-    orange:'Check-in inviato! Ascolta il tuo corpo durante la sessione di oggi.',
-    red:'Check-in inviato! Comunica al coach come ti senti.'
-  };
   const emojis={green:'✅',orange:'⚡',red:'💬'};
-  const titles={green:'Ottimo!',orange:'Inviato',red:'Inviato'};
+  const titles={green:'Check-in inviato!',orange:'Check-in inviato!',red:'Check-in inviato!'};
+  const msgs={green:'Continua così, il tuo recupero sembra ottimo.',orange:'Ascolta il tuo corpo durante la sessione di oggi.',red:'Comunica al coach come ti senti.'};
   waitFB(()=>{
     window._set(window._ref(window._db,`wellness/${today()}/${currentPlayerName}`),
       {sleep,hours,physical,mental,hrv,rpe,notes,score,status,pos:currentPlayerPos,timestamp:Date.now()})
@@ -1109,38 +1019,33 @@ window.submitWellness=function(){
       const result=document.getElementById('readiness-result');
       result.className=`readiness-result ${status}`;result.style.display='block';
       document.getElementById('rr-emoji').textContent=emojis[status];
-      document.getElementById('rr-score').textContent='';// NO score visibile al giocatore
       document.getElementById('rr-title').textContent=titles[status];
       document.getElementById('rr-msg').textContent=msgs[status];
-      const note=document.getElementById('rr-note');
-      note.style.display='block';
-      note.textContent='Il tuo coach vedrà i tuoi dati e valuterà il programma di oggi.';
       result.scrollIntoView({behavior:'smooth',block:'center'});
-      showToast('Check-in inviato! ✅');
-    }).catch(()=>showToast('Errore connessione ❗',false));
+      showToast('Check-in inviato al coach! ✅');
+    }).catch(()=>showToast('Errore. Controlla la connessione.',false));
   });
 };
 
 // ═══ MICROCICLO ═══
 const microData=[
-  {day:'MD+2',label:'RIGENERAZIONE',cls:'day-rec',focus:'Recupero attivo',td:'3.000–4.500m',hsr:'≤250m',acc:'15–25',hmld:'150–250m',rule:'NO sprint >25.2 km/h. Piscina, flush aerobico blando.'},
-  {day:'MD+3',label:'RIPRISTINO',cls:'day-rec',focus:'Ripristino neuromuscolare',td:'5.500–7.000m',hsr:'400–550m',acc:'30–45',hmld:'380–520m',rule:'Sprint <15% Gref. Reintroduzione acc/dec moderate.'},
-  {day:'MD+4',label:'SVILUPPO',cls:'day-load',focus:'Sessione principale',td:'7.500–9.500m',hsr:'600–780m',acc:'55–75',hmld:'650–850m',rule:'Massima intensità settimana. SSG ad alta densità. ACWR <1.3.'},
-  {day:'MD-1',label:'ATTIVAZIONE',cls:'day-md',focus:'Neuro-attivazione',td:'3.500–5.000m',hsr:'120–180m',acc:'20–35',hmld:'200–320m',rule:'45–55 min totali. RPE target 11–13. Zero accumulo fatica.'},
-  {day:'MD',label:'MATCH DAY',cls:'day-md',focus:'Partita — Gref 100%',td:'10.500–11.500m',hsr:'800–1.000m',acc:'90–110',hmld:'900–1.100m',rule:'Riferimento baseline EPL/LaLiga per tutti i calcoli.'},
+  {day:'MD+2',label:'RIGENERAZIONE',cls:'day-rec',focus:'Recupero attivo',td:'3.000–4.500m',hsr:'≤250m',acc:'15–25',hmld:'150–250m',rule:'NO sprint >25.2 km/h. Piscina, flush aerobico.'},
+  {day:'MD+3',label:'RIPRISTINO',cls:'day-rec',focus:'Ripristino neuromuscolare',td:'5.500–7.000m',hsr:'400–550m',acc:'30–45',hmld:'380–520m',rule:'Sprint <15% Gref. Acc/dec moderate.'},
+  {day:'MD+4',label:'SVILUPPO',cls:'day-load',focus:'Sessione principale',td:'7.500–9.500m',hsr:'600–780m',acc:'55–75',hmld:'650–850m',rule:'Massima intensità settimana. ACWR <1.3.'},
+  {day:'MD-1',label:'ATTIVAZIONE',cls:'day-md',focus:'Neuro-attivazione',td:'3.500–5.000m',hsr:'120–180m',acc:'20–35',hmld:'200–320m',rule:'45–55 min. RPE 11–13. Zero fatica.'},
+  {day:'MD',label:'MATCH DAY',cls:'day-md',focus:'Partita — Gref 100%',td:'10.500–11.500m',hsr:'800–1.000m',acc:'90–110',hmld:'900–1.100m',rule:'Riferimento baseline EPL/LaLiga.'},
 ];
 function renderMicrociclo(){
   const tbody=document.getElementById('micro-tbody');if(!tbody)return;
-  const colors={'MD+2':'green','MD+3':'green','MD+4':'orange','MD-1':'red','MD':'blue'};
+  const c={'MD+2':'green','MD+3':'green','MD+4':'orange','MD-1':'red','MD':'blue'};
   tbody.innerHTML='';
   microData.forEach(m=>{
-    const c=colors[m.day]||'';
     tbody.innerHTML+=`<tr><td><div class="day-label ${m.cls}">${m.day}</div><div style="font-size:9px;color:var(--text2)">${m.label}</div></td>
     <td style="font-size:11px">${m.focus}</td>
-    <td><span class="mpill ${c}">${m.td}</span></td>
-    <td><span class="mpill ${c}">${m.hsr}</span></td>
+    <td><span class="mpill ${c[m.day]||''}">${m.td}</span></td>
+    <td><span class="mpill ${c[m.day]||''}">${m.hsr}</span></td>
     <td><span class="mpill">${m.acc}</span></td>
-    <td><span class="mpill ${c}">${m.hmld}</span></td>
+    <td><span class="mpill ${c[m.day]||''}">${m.hmld}</span></td>
     <td style="font-size:10px;color:var(--text2);max-width:180px;line-height:1.4">${m.rule}</td></tr>`;
   });
 }
@@ -1162,35 +1067,26 @@ function renderBenchmark(filter){
     <div class="bench-row"><span class="bench-label">🏃 HSR</span><span class="bench-val">${b.hsr}</span></div>
     <div class="bench-row"><span class="bench-label">🔄 Acc/Dec</span><span class="bench-val">${b.acc}</span></div>
     <div class="bench-row"><span class="bench-label">🔥 HMLD</span><span class="bench-val">${b.hmld}</span></div>
-    <div class="bench-row"><span class="bench-label">🚀 V-Max</span><span class="bench-val">${b.vmax}</span></div>
-    </div>`;
+    <div class="bench-row"><span class="bench-label">🚀 V-Max</span><span class="bench-val">${b.vmax}</span></div></div>`;
   });
 }
 window.filterBench=f=>renderBenchmark(f);
 
 // ═══ NUTRITION ═══
 const nutrData={
-  post:[
-    {title:'⚡ 0–30 min',items:['30–40g proteine rapide (whey)','60–80g carbo alto GI (banana, riso)','500ml acqua + elettroliti','Evita grassi: rallentano assorbimento']},
-    {title:'🍽️ Pasto 1–3h',items:['Pollo/pesce + pasta o riso 300g','Verdure cotte (antiossidanti)','20g grassi buoni (olio EVO)','Frutta fresca con vit. C']},
-    {title:'💊 Integrazione',items:['Creatina 3–5g','Omega-3 2–3g (antinfiammatorio)','Magnesio glicinato 300–400mg','Tart cherry 30ml (riduce DOMS)']},
-    {title:'💧 Reidratazione',items:['1kg perso = 1.5L da reintegrare','Sodio-potassio prime 2h','Evita alcol (compromette HRV)','Urine chiare = ok']},
-  ],
-  pre:[
-    {title:'🕒 3–4h prima',items:['300–500 kcal carbo medio GI','20–30g proteine magre','Grassi <15g','500ml acqua']},
-    {title:'⏱️ 60–90 min prima',items:['1–2 banana o 30g riso soffiato','Caffeina 3–6 mg/kg','No cibi ad alto contenuto di grassi','No alto contenuto di fibre']},
-    {title:'⚡ 15–30 min prima',items:['5–10g maltodestrine se serve','200ml acqua','Nessun cibo nuovo mai visto','Beta-alanina 3.2g se in protocollo']},
-  ],
-  recovery:[
-    {title:'😴 Pre-sonno',items:['Caseina 40g (rilascio lento)','Kiwi x2 o tart cherry (melatonina)','Magnesio 300–400mg','Latte + miele (triptofano)']},
-    {title:'🌙 Protocollo sonno',items:['Ambiente 16–18°C','Blackout totale','No schermo 60 min prima','Melatonina 0.5–1mg se serve']},
-    {title:'🔥 Recovery tools',items:['CWI 10–15°C per 10–15 min post-gara','Contrast therapy caldo+freddo','Foam rolling + stretching 15 min','Calze compressive notturne']},
-  ],
-  match:[
-    {title:'🌅 Colazione 3–4h prima',items:['Porridge 80g + latte + miele + banana','2–3 uova strapazzate','Succo frutta 200ml','Caffè se abituato']},
-    {title:'🍝 Pre-gara 3h prima',items:['Pasta 200g al pomodoro','Pollo 150g alla piastra','Pane bianco','1 frutto (mela o pera)']},
-    {title:'🥤 Durante gara',items:['Acqua ogni 15–20 min','Gel energetici oltre 70 min','Caffeina gum al 45\'','Elettroliti: sodio contro crampi']},
-  ],
+  post:[{title:'⚡ 0–30 min',items:['30–40g proteine rapide (whey)','60–80g carbo alto GI','500ml acqua + elettroliti','Evita grassi']},
+    {title:'🍽️ Pasto 1–3h',items:['Pollo/pesce + pasta o riso 300g','Verdure cotte (antiossidanti)','Olio EVO 20g','Frutta con vit. C']},
+    {title:'💊 Integrazione',items:['Creatina 3–5g','Omega-3 2–3g','Magnesio glicinato 300–400mg','Tart cherry 30ml']},
+    {title:'💧 Reidratazione',items:['1kg perso = 1.5L','Sodio-potassio prime 2h','No alcol','Urine chiare = ok']}],
+  pre:[{title:'🕒 3–4h prima',items:['300–500 kcal carbo medio GI','20–30g proteine magre','Grassi <15g','500ml acqua']},
+    {title:'⏱️ 60–90 min',items:['1–2 banana','Caffeina 3–6 mg/kg','No grassi','No fibre']},
+    {title:'⚡ 15–30 min',items:['5–10g maltodestrine','200ml acqua','Nessun cibo nuovo','Beta-alanina 3.2g']}],
+  recovery:[{title:'😴 Pre-sonno',items:['Caseina 40g','Kiwi x2 o tart cherry','Magnesio 300–400mg','Latte + miele']},
+    {title:'🌙 Protocollo',items:['Ambiente 16–18°C','Blackout totale','No schermo 60 min prima','Melatonina 0.5–1mg']},
+    {title:'🔥 Recovery',items:['CWI 10–15°C per 10–15 min','Contrast therapy','Foam rolling 15 min','Calze compressive']}],
+  match:[{title:'🌅 Colazione 3–4h',items:['Porridge 80g + miele + banana','2–3 uova','Succo frutta 200ml','Caffè se abituato']},
+    {title:'🍝 Pre-gara 3h',items:['Pasta 200g al pomodoro','Pollo 150g','Pane bianco','1 frutto']},
+    {title:'🥤 Durante',items:['Acqua ogni 15–20 min','Gel oltre 70 min','Caffeina gum al 45\'','Sodio contro crampi']}],
 };
 window.showNutr=function(phase){
   const c=document.getElementById('nutr-content');if(!c)return;
@@ -1207,18 +1103,15 @@ window.sendMessage=async function(){
   addMsg(text,'user');input.value='';
   const thinking=addThinking();
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,
-        system:`Sei un AI Performance Coach per calciatori professionisti. Rispondi SEMPRE in italiano. 
-Esperto in: nutrizione sportiva, recupero muscolare, HRV, sonno atleti, periodizzazione, GPS metrics K-Sport (Pot.Metabolica, Dist.Equivalente, Indice Anaerobico, HSR, acc/dec).
-Evidenze scientifiche 2022-2025. Risposte chiare max 180 parole. Usa emoji. Riferimenti a EPL, LaLiga, Bundesliga.`,
-        messages:[{role:'user',content:text}]})
-    });
-    const data=await res.json();
-    thinking.remove();
-    addMsg(data.content?.map(b=>b.text||'').join('')||'Errore.','bot');
-  }catch(e){thinking.remove();addMsg('Errore connessione.','bot');}
+    const reply=await callAI(
+      [{role:'user',content:text}],
+      `Sei un AI Performance Coach per calciatori professionisti. Rispondi SEMPRE in italiano. 
+Esperto in: nutrizione sportiva, recupero muscolare, HRV, sonno atleti, periodizzazione, GPS K-Sport.
+Evidenze scientifiche 2022-2025. Max 180 parole. Usa emoji. Riferisci a EPL, LaLiga, Bundesliga.`,
+      800
+    );
+    thinking.remove();addMsg(reply,'bot');
+  }catch(e){thinking.remove();addMsg('Servizio temporaneamente non disponibile. Riprova tra poco.','bot');}
 };
 function addMsg(text,role){
   const msgs=document.getElementById('ai-messages');
@@ -1255,7 +1148,7 @@ window.switchPlayerTab=function(tab,el){
 };
 
 // ═══ UTILS ═══
-function fileToBase64(file){
+function toBase64(file){
   return new Promise((res,rej)=>{
     const r=new FileReader();
     r.onload=()=>res(r.result.split(',')[1]);
