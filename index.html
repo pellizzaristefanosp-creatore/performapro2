@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PerformaPro">
+<title>PerformaPro — Elite Football</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#080c12; --surface:#0d1520; --surface2:#111d2e; --border:#1e2d42;
+  --accent:#00c2ff; --accent2:#0077ff; --green:#00e676; --orange:#ff9800;
+  --red:#f44336; --text:#e8f0fe; --text2:#7a9bb5; --gold:#ffd700;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* LANDING */
+#landing{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;
+background:radial-gradient(ellipse at 20% 50%,rgba(0,119,255,.12),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,194,255,.08),transparent 50%),var(–bg)}
+.brand-logo{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:58px;letter-spacing:-2px;
+background:linear-gradient(135deg,#fff,var(–accent) 60%,var(–accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+.brand-sub{font-family:‘Barlow Condensed’,sans-serif;font-weight:600;font-size:13px;letter-spacing:6px;color:var(–text2);text-transform:uppercase;margin-top:6px;text-align:center}
+.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:660px;margin-top:48px}
+@media(max-width:550px){.login-grid{grid-template-columns:1fr}}
+.login-card{background:var(–surface);border:1px solid var(–border);border-radius:16px;padding:30px 24px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.login-card:hover,.login-card:active{border-color:var(–accent);transform:translateY(-3px)}
+.card-icon{font-size:36px;margin-bottom:12px}
+.card-title{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:26px;margin-bottom:6px}
+.card-desc{color:var(–text2);font-size:13px;line-height:1.5}
+.coach-card .card-title{color:var(–accent)}
+.player-card .card-title{color:var(–green)}
+
+/* AUTH */
+.auth-overlay{display:none;position:fixed;inset:0;background:rgba(8,12,18,.95);align-items:center;justify-content:center;z-index:100;padding:20px;backdrop-filter:blur(8px)}
+.auth-overlay.active{display:flex}
+.auth-box{background:var(–surface);border:1px solid var(–border);border-radius:20px;padding:36px;width:100%;max-width:400px}
+.auth-box h2{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:26px;margin-bottom:6px}
+.auth-box p{color:var(–text2);font-size:13px;margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(–text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(–surface2);border:1px solid var(–border);border-radius:10px;color:var(–text);padding:12px 14px;font-size:15px;font-family:‘Barlow’,sans-serif;outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(–accent)}
+.form-group select option{background:var(–surface2)}
+.btn{width:100%;padding:13px;border-radius:10px;border:none;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:17px;letter-spacing:1px;cursor:pointer;transition:all .2s}
+.btn-accent{background:linear-gradient(135deg,var(–accent2),var(–accent));color:#fff}
+.btn-green{background:linear-gradient(135deg,#00a855,var(–green));color:#000}
+.btn-close{background:transparent;border:1px solid var(–border);color:var(–text2);font-size:13px;margin-top:8px}
+.error-msg{color:var(–red);font-size:13px;margin-top:6px;display:none}
+.mt12{margin-top:12px}
+
+/* TOPBAR + TABS */
+.topbar{background:var(–surface);border-bottom:1px solid var(–border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-brand{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:20px;color:var(–accent)}
+.btn-logout{background:transparent;border:1px solid var(–border);color:var(–text2);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer}
+.nav-tabs{background:var(–surface);border-bottom:1px solid var(–border);display:flex;overflow-x:auto;padding:0 12px;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{padding:13px 16px;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:14px;color:var(–text2);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.nav-tab.active{color:var(–accent);border-bottom-color:var(–accent)}
+
+/* MAIN */
+#coach-app,#player-app{display:none;min-height:100vh}
+.main-content{padding:20px;max-width:1100px;margin:0 auto}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.section-title{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:20px;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.section-title span{color:var(–accent)}
+
+/* PLAYER CARDS */
+.players-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.player-card-coach{background:var(–surface);border:1px solid var(–border);border-radius:14px;padding:18px;position:relative;overflow:hidden;transition:all .2s}
+.player-card-coach::before{content:’’;position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px}
+.player-card-coach.green::before{background:var(–green)}
+.player-card-coach.orange::before{background:var(–orange)}
+.player-card-coach.red::before{background:var(–red)}
+.player-card-coach.no-data::before{background:var(–border)}
+.pc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.pc-name{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:18px}
+.pc-pos{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.pc-pos.ATT{color:#ff6b35}.pc-pos.CEN{color:var(–accent)}.pc-pos.DIF{color:var(–green)}.pc-pos.POR{color:var(–gold)}
+.readiness-badge{padding:5px 10px;border-radius:20px;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:12px;letter-spacing:.5px}
+.badge-green{background:rgba(0,230,118,.15);color:var(–green);border:1px solid rgba(0,230,118,.3)}
+.badge-orange{background:rgba(255,152,0,.15);color:var(–orange);border:1px solid rgba(255,152,0,.3)}
+.badge-red{background:rgba(244,67,54,.15);color:var(–red);border:1px solid rgba(244,67,54,.3)}
+.badge-grey{background:rgba(122,155,181,.1);color:var(–text2);border:1px solid var(–border)}
+.pc-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+.pc-metric{background:var(–surface2);border-radius:8px;padding:7px;text-align:center}
+.pc-metric .val{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:16px}
+.pc-metric .lbl{font-size:9px;color:var(–text2);text-transform:uppercase;letter-spacing:.5px}
+.pc-suggestion{font-size:12px;color:var(–text2);background:var(–surface2);border-radius:8px;padding:9px 11px;border-left:3px solid var(–border);line-height:1.5;margin-top:8px}
+.pc-suggestion.sug-green{border-left-color:var(–green)}
+.pc-suggestion.sug-orange{border-left-color:var(–orange)}
+.pc-suggestion.sug-red{border-left-color:var(–red)}
+.progress-bar-wrap{background:var(–surface2);border-radius:6px;height:6px;overflow:hidden;margin-top:6px}
+.progress-bar{height:100%;border-radius:6px;transition:width .6s ease}
+.pb-green{background:var(–green)}.pb-orange{background:var(–orange)}.pb-red{background:var(–red)}
+
+/* GPS */
+.upload-zone{border:2px dashed var(–border);border-radius:14px;padding:32px;text-align:center;cursor:pointer;transition:all .2s;background:var(–surface)}
+.upload-zone:hover{border-color:var(–accent)}
+.gps-manual-form{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.gps-input-card{background:var(–surface2);border:1px solid var(–border);border-radius:10px;padding:12px}
+.gps-input-card label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(–text2);display:block;margin-bottom:5px}
+.gps-input-card input{background:transparent;border:none;color:var(–text);font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:20px;width:100%;outline:none}
+.gps-input-card .unit{font-size:10px;color:var(–text2);margin-top:1px}
+.session-list{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.session-item{background:var(–surface2);border:1px solid var(–border);border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.metric-pill{display:inline-block;background:var(–surface2);border:1px solid var(–border);border-radius:6px;padding:3px 7px;font-size:11px;margin:2px;white-space:nowrap}
+.pill-blue{border-color:rgba(0,194,255,.3);color:var(–accent)}
+.pill-green{border-color:rgba(0,230,118,.3);color:var(–green)}
+.pill-orange{border-color:rgba(255,152,0,.3);color:var(–orange)}
+.pill-red{border-color:rgba(244,67,54,.3);color:var(–red)}
+
+/* MICROCICLO */
+.micro-table-wrap{overflow-x:auto;margin-top:14px}
+.micro-table{width:100%;border-collapse:collapse;font-size:12px}
+.micro-table th{background:var(–surface2);padding:9px 12px;text-align:left;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:12px;letter-spacing:.5px;color:var(–text2);text-transform:uppercase;border-bottom:1px solid var(–border)}
+.micro-table td{padding:9px 12px;border-bottom:1px solid rgba(30,45,66,.5);vertical-align:top}
+.day-label{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:14px}
+.day-md{color:var(–accent)}.day-rec{color:var(–green)}.day-load{color:var(–orange)}
+
+/* BENCHMARK */
+.bench-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.bench-card{background:var(–surface);border:1px solid var(–border);border-radius:12px;padding:16px}
+.bench-pos{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:28px;margin-bottom:3px}
+.bench-pos.ATT{color:#ff6b35}.bench-pos.CEN{color:var(–accent)}.bench-pos.DIF{color:var(–green)}.bench-pos.POR{color:var(–gold)}
+.bench-league{font-size:10px;color:var(–text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.bench-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(30,45,66,.5)}
+.bench-row:last-child{border-bottom:none}
+.bench-label{font-size:11px;color:var(–text2)}
+.bench-val{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:14px}
+
+/* ROSA */
+.add-player-form{background:var(–surface);border:1px solid var(–border);border-radius:14px;padding:20px;margin-bottom:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+
+/* PLAYER HEADER */
+.player-header{background:linear-gradient(135deg,var(–surface),rgba(0,119,255,.1));border-bottom:1px solid var(–border);padding:20px}
+.player-name-big{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:36px}
+.player-pos-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.pos-ATT{background:rgba(255,107,53,.15);color:#ff6b35;border:1px solid rgba(255,107,53,.3)}
+.pos-CEN{background:rgba(0,194,255,.15);color:var(–accent);border:1px solid rgba(0,194,255,.3)}
+.pos-DIF{background:rgba(76,175,80,.15);color:var(–green);border:1px solid rgba(76,175,80,.3)}
+.pos-POR{background:rgba(255,215,0,.15);color:var(–gold);border:1px solid rgba(255,215,0,.3)}
+
+/* SLIDERS */
+.slider-group{margin-bottom:22px}
+.slider-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.slider-label{font-weight:600;font-size:14px}
+.slider-val{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:22px;color:var(–accent);min-width:36px;text-align:right}
+.slider-desc{font-size:12px;color:var(–text2);margin-bottom:6px}
+input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;outline:none;cursor:pointer;background:linear-gradient(to right,var(–accent) 0%,var(–accent) var(–val,50%),var(–surface2) var(–val,50%),var(–surface2) 100%)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(–accent);border:3px solid var(–bg);cursor:pointer;box-shadow:0 0 10px rgba(0,194,255,.4)}
+.range-labels{display:flex;justify-content:space-between;font-size:10px;color:var(–text2);margin-top:3px}
+
+/* SLEEP APPS */
+.sleep-apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:18px}
+.sleep-app-chip{background:var(–surface2);border:1px solid var(–border);border-radius:10px;padding:9px 10px;display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s}
+.sleep-app-chip.selected{border-color:var(–accent);background:rgba(0,194,255,.08);color:var(–accent)}
+.file-upload-area{border:2px dashed var(–border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(–surface2)}
+.file-upload-area:hover{border-color:var(–accent)}
+.preview-img{max-width:100%;border-radius:10px;margin-top:10px;max-height:180px;object-fit:contain}
+
+/* READINESS RESULT */
+.readiness-result{border-radius:16px;padding:22px;text-align:center;margin-top:18px;display:none}
+.readiness-result.green{background:rgba(0,230,118,.08);border:2px solid rgba(0,230,118,.3)}
+.readiness-result.orange{background:rgba(255,152,0,.08);border:2px solid rgba(255,152,0,.3)}
+.readiness-result.red{background:rgba(244,67,54,.08);border:2px solid rgba(244,67,54,.3)}
+.readiness-emoji{font-size:48px;margin-bottom:6px}
+.readiness-score{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:44px}
+.readiness-score.green{color:var(–green)}.readiness-score.orange{color:var(–orange)}.readiness-score.red{color:var(–red)}
+.readiness-title{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:18px;margin:5px 0}
+.readiness-msg{font-size:13px;color:var(–text2);line-height:1.6;max-width:380px;margin:0 auto}
+
+/* NUTRITION */
+.nutr-phase-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.nutr-phase-btn{padding:9px 16px;border-radius:8px;border:none;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s}
+.nutrition-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.nutr-card{background:var(–surface);border:1px solid var(–border);border-radius:12px;padding:18px}
+.nutr-card h4{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:16px;margin-bottom:9px;color:var(–accent)}
+.nutr-card ul{list-style:none}
+.nutr-card ul li{font-size:12px;color:var(–text2);padding:4px 0;border-bottom:1px solid rgba(30,45,66,.5);display:flex;align-items:flex-start;gap:7px;line-height:1.4}
+.nutr-card ul li:last-child{border-bottom:none}
+.nutr-card ul li::before{content:‘→’;color:var(–accent);font-weight:700;flex-shrink:0}
+
+/* AI CHAT */
+.ai-chat{background:var(–surface);border:1px solid var(–border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;height:480px}
+.ai-chat-header{background:var(–surface2);padding:14px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(–border)}
+.ai-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(–accent2),var(–accent));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ai-name{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:16px}
+.ai-status{font-size:11px;color:var(–green)}
+.ai-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.ai-messages::-webkit-scrollbar{width:3px}
+.ai-messages::-webkit-scrollbar-thumb{background:var(–border);border-radius:2px}
+.msg{max-width:85%}
+.msg.bot{align-self:flex-start}.msg.user{align-self:flex-end}
+.msg-bubble{padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.6}
+.msg.bot .msg-bubble{background:var(–surface2);border:1px solid var(–border);border-radius:4px 16px 16px 16px}
+.msg.user .msg-bubble{background:linear-gradient(135deg,var(–accent2),var(–accent));color:#fff;border-radius:16px 16px 4px 16px}
+.msg-time{font-size:10px;color:var(–text2);margin-top:3px;padding:0 3px}
+.quick-qs{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+.quick-q{background:var(–surface2);border:1px solid var(–border);border-radius:20px;padding:6px 12px;font-size:11px;cursor:pointer;transition:all .2s;color:var(–text2)}
+.quick-q:hover{border-color:var(–accent);color:var(–accent)}
+.ai-input-row{padding:12px;border-top:1px solid var(–border);display:flex;gap:8px}
+.ai-input{flex:1;background:var(–surface2);border:1px solid var(–border);border-radius:10px;color:var(–text);padding:10px 14px;font-size:13px;font-family:‘Barlow’,sans-serif;outline:none;resize:none}
+.ai-input:focus{border-color:var(–accent)}
+.ai-send{background:linear-gradient(135deg,var(–accent2),var(–accent));border:none;border-radius:10px;color:#fff;padding:10px 16px;cursor:pointer;font-size:16px}
+.ai-thinking{display:flex;gap:4px;align-items:center;padding:2px 0}
+.dot{width:6px;height:6px;border-radius:50%;background:var(–text2);animation:bounce 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-7px)}}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:var(–surface);border:1px solid var(–green);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:10px;z-index:200;transform:translateY(100px);opacity:0;transition:all .3s;max-width:300px}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* LOADING */
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(8,12,18,.9);align-items:center;justify-content:center;z-index:300;flex-direction:column;gap:16px}
+.loading-overlay.active{display:flex}
+.spinner{width:40px;height:40px;border:3px solid var(–border);border-top-color:var(–accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:18px;color:var(–text2)}
+
+/* SYNC INDICATOR */
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(–green);display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .35s ease both}
+</style>
+
+</head>
+<body>
+
+<!-- LOADING -->
+
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loading-text">Connessione in corso...</div>
+</div>
+
+<!-- LANDING -->
+
+<div id="landing">
+  <div class="brand-logo">PerformaPro</div>
+  <div class="brand-sub">Elite Football Performance System</div>
+  <div class="login-grid">
+    <div class="login-card coach-card" onclick="showAuth('coach')">
+      <div class="card-icon">🎯</div>
+      <div class="card-title">Coach / Preparatore</div>
+      <div class="card-desc">Dashboard squadra in tempo reale. Readiness, GPS, microciclo, benchmark EPL/LaLiga.</div>
+    </div>
+    <div class="login-card player-card" onclick="showAuth('player')">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Giocatore</div>
+      <div class="card-desc">Inserisci il tuo benessere quotidiano. Il coach riceve tutto in automatico.</div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH COACH -->
+
+<div class="auth-overlay" id="auth-coach">
+  <div class="auth-box fade-in">
+    <h2>🎯 Accesso Coach</h2>
+    <p>Inserisci il codice segreto</p>
+    <div class="form-group">
+      <label>Codice Coach</label>
+      <input type="password" id="coach-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')loginCoach()">
+    </div>
+    <div class="error-msg" id="coach-err">❌ Codice errato. Riprova.</div>
+    <button class="btn btn-accent mt12" onclick="loginCoach()">ENTRA</button>
+    <button class="btn btn-close mt12" onclick="closeAuth('coach')">Annulla</button>
+  </div>
+</div>
+
+<!-- AUTH PLAYER -->
+
+<div class="auth-overlay" id="auth-player">
+  <div class="auth-box fade-in">
+    <h2>⚡ Accesso Giocatore</h2>
+    <p>Inserisci il tuo nome esatto (come registrato dal coach)</p>
+    <div class="form-group">
+      <label>Il tuo nome</label>
+      <input type="text" id="player-name-input" placeholder="Es. Marco Rossi" onkeydown="if(event.key==='Enter')loginPlayer()">
+    </div>
+    <div class="form-group">
+      <label>Posizione</label>
+      <select id="player-pos-input">
+        <option value="ATT">⚡ Attaccante</option>
+        <option value="CEN">🔵 Centrocampista</option>
+        <option value="DIF">🛡️ Difensore</option>
+        <option value="POR">🥅 Portiere</option>
+      </select>
+    </div>
+    <button class="btn btn-green mt12" onclick="loginPlayer()">ENTRA</button>
+    <button class="btn btn-close mt12" onclick="closeAuth('player')">Annulla</button>
+  </div>
+</div>
+
+<!-- COACH APP -->
+
+<div id="coach-app">
+  <div class="topbar">
+    <div class="topbar-brand">PerformaPro <span style="color:var(--text2);font-size:13px;font-weight:400">Coach</span></div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:11px;color:var(--text2)"><span class="sync-dot"></span>Live</span>
+      <button class="btn-logout" onclick="logout()">← Esci</button>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="switchCoachTab('readiness',this)">🚦 Readiness</div>
+    <div class="nav-tab" onclick="switchCoachTab('gps',this)">📡 GPS Upload</div>
+    <div class="nav-tab" onclick="switchCoachTab('microciclo',this)">📅 Microciclo</div>
+    <div class="nav-tab" onclick="switchCoachTab('benchmark',this)">📊 Benchmark</div>
+    <div class="nav-tab" onclick="switchCoachTab('rosa',this)">👥 Rosa</div>
+  </div>
+
+  <!-- READINESS TAB -->
+
+  <div class="main-content tab-content active" id="tab-readiness">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <div class="section-title" style="margin-bottom:0">🚦 Readiness <span>Squadra</span></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <select id="micro-day-filter" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:7px 12px;font-size:13px;outline:none" onchange="renderReadiness()">
+          <option value="">— Seleziona giorno microciclo —</option>
+          <option value="MD+2">MD+2 (2gg dopo partita)</option>
+          <option value="MD+3">MD+3</option>
+          <option value="MD+4">MD+4</option>
+          <option value="MD-1">MD-1 (pre-partita)</option>
+          <option value="MD">Match Day</option>
+        </select>
+      </div>
+    </div>
+    <div class="players-grid" id="players-grid"></div>
+    <div style="margin-top:20px;padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;font-size:12px;color:var(--text2);line-height:1.9">
+      <strong style="color:var(--text)">🟢 VERDE (75–100)</strong> — Piena disponibilità. Allenamento completo.<br>
+      <strong style="color:var(--text)">🟠 ARANCIONE (45–74)</strong> — Carico ridotto. Monitorare durante sessione.<br>
+      <strong style="color:var(--text)">🔴 ROSSO (0–44)</strong> — Solo lavoro rigenerativo o riposo.<br>
+      <span style="color:var(--border)">⚪ GRIGIO</span> — Dati non ancora inseriti oggi.
+    </div>
+  </div>
+
+  <!-- GPS TAB -->
+
+  <div class="main-content tab-content" id="tab-gps">
+    <div class="section-title">📡 GPS <span>Upload Sessione</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-bottom:18px">
+      <div style="grid-column:1/-1;font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1px">Giorno Microciclo</div>
+      <div class="metric-pill pill-blue" onclick="selectMicro(this,'MD+2')" style="cursor:pointer;padding:9px;text-align:center">MD+2</div>
+      <div class="metric-pill pill-green" onclick="selectMicro(this,'MD+3')" style="cursor:pointer;padding:9px;text-align:center">MD+3</div>
+      <div class="metric-pill pill-orange" onclick="selectMicro(this,'MD+4')" style="cursor:pointer;padding:9px;text-align:center">MD+4</div>
+      <div class="metric-pill pill-red" onclick="selectMicro(this,'MD-1')" style="cursor:pointer;padding:9px;text-align:center">MD-1</div>
+      <div class="metric-pill" onclick="selectMicro(this,'MD')" style="cursor:pointer;padding:9px;text-align:center">MD ⚽</div>
+    </div>
+    <div id="micro-target-info" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:18px;font-size:13px;color:var(--text2)">
+      ← Seleziona un giorno per vedere i target GPS EPL/LaLiga
+    </div>
+    <div class="upload-zone" onclick="document.getElementById('gps-file-input').click()" style="margin-bottom:16px">
+      <input type="file" id="gps-file-input" accept="image/*,.pdf,.csv,.xlsx" style="display:none" onchange="handleGpsFile(event)">
+      <div style="font-size:32px;margin-bottom:8px">📁</div>
+      <div style="font-weight:600;margin-bottom:3px">Carica Screenshot / CSV / PDF</div>
+      <div style="font-size:12px;color:var(--text2)">STATSports · Catapult · GPSports · Polar Team Pro</div>
+    </div>
+    <div id="gps-file-preview" style="display:none;margin-bottom:16px">
+      <img id="gps-img-preview" class="preview-img" alt="">
+      <div style="font-size:12px;color:var(--green);margin-top:6px">✅ File caricato</div>
+    </div>
+    <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Inserimento manuale</div>
+    <div class="gps-manual-form">
+      <div class="gps-input-card"><label>Distanza Totale</label><input type="number" id="gm-td" placeholder="9800"><div class="unit">m</div></div>
+      <div class="gps-input-card"><label>HSR (19.8–25.2)</label><input type="number" id="gm-hsr" placeholder="450"><div class="unit">m</div></div>
+      <div class="gps-input-card"><label>Sprint (&gt;25.2)</label><input type="number" id="gm-spr" placeholder="120"><div class="unit">m</div></div>
+      <div class="gps-input-card"><label>Acc ≥3 m/s²</label><input type="number" id="gm-acc" placeholder="28"><div class="unit">n°</div></div>
+      <div class="gps-input-card"><label>Dec ≤−3 m/s²</label><input type="number" id="gm-dec" placeholder="25"><div class="unit">n°</div></div>
+      <div class="gps-input-card"><label>Vel. Max</label><input type="number" id="gm-vmax" placeholder="31.2"><div class="unit">km/h</div></div>
+      <div class="gps-input-card"><label>Player Load</label><input type="number" id="gm-pl" placeholder="680"><div class="unit">AU</div></div>
+      <div class="gps-input-card"><label>HMLD</label><input type="number" id="gm-hmld" placeholder="780"><div class="unit">m</div></div>
+    </div>
+    <button class="btn btn-accent" style="max-width:200px;margin-top:16px" onclick="saveGpsSession()">💾 SALVA SESSIONE</button>
+    <div style="margin-top:24px">
+      <div class="section-title" style="font-size:17px">📋 Sessioni <span>Salvate</span></div>
+      <div class="session-list" id="session-list"><div style="color:var(--text2);font-size:13px;padding:16px;text-align:center">Nessuna sessione</div></div>
+    </div>
+  </div>
+
+  <!-- MICROCICLO TAB -->
+
+  <div class="main-content tab-content" id="tab-microciclo">
+    <div class="section-title">📅 <span>Microciclo Tipo</span> — EPL / La Liga (Buchheit 2024)</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.6">Valori come % del Gref (riferimento partita) e assoluti per giocatore outfield. Gref EPL: TD ~11.000m · HSR ~900m · Sprint ~220m</div>
+    <div class="micro-table-wrap">
+      <table class="micro-table">
+        <thead><tr><th>Giorno</th><th>Focus</th><th>TD</th><th>HSR</th><th>Sprint</th><th>Acc/Dec</th><th>HMLD</th><th>Note</th></tr></thead>
+        <tbody id="micro-tbody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;font-size:12px;color:var(--text2);line-height:1.9">
+      <strong style="color:var(--green)">✅ MD+2:</strong> HSR max 30% Gref — NO sprint &gt;25.2 km/h — flush rigenerativo<br>
+      <strong style="color:var(--green)">✅ MD+3:</strong> HSR 50–60% Gref — sprint &lt;15% Gref — reintroduzione acc/dec<br>
+      <strong style="color:var(--orange)">⚠️ MD+4:</strong> HSR 70–80% Gref — sprint 40–55% Gref — sessione sviluppo<br>
+      <strong style="color:var(--red)">🔴 MD-1:</strong> HSR &lt;20% Gref — sprint simbolici &lt;80m — attivazione neuromuscolare
+    </div>
+  </div>
+
+  <!-- BENCHMARK TAB -->
+
+  <div class="main-content tab-content" id="tab-benchmark">
+    <div class="section-title">📊 Benchmark GPS <span>per Posizione</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+      <button class="btn btn-accent" style="max-width:100px;padding:8px;font-size:13px" onclick="filterBench('all')">Tutti</button>
+      <button class="btn" style="max-width:120px;padding:8px;font-size:13px;background:rgba(255,107,53,.15);color:#ff6b35;border:1px solid rgba(255,107,53,.3)" onclick="filterBench('ATT')">Attaccanti</button>
+      <button class="btn" style="max-width:140px;padding:8px;font-size:13px;background:rgba(0,194,255,.15);color:var(--accent);border:1px solid rgba(0,194,255,.3)" onclick="filterBench('CEN')">Centrocampisti</button>
+      <button class="btn" style="max-width:120px;padding:8px;font-size:13px;background:rgba(76,175,80,.15);color:var(--green);border:1px solid rgba(76,175,80,.3)" onclick="filterBench('DIF')">Difensori</button>
+    </div>
+    <div class="bench-grid" id="bench-grid"></div>
+  </div>
+
+  <!-- ROSA TAB -->
+
+  <div class="main-content tab-content" id="tab-rosa">
+    <div class="section-title">👥 Gestione <span>Rosa</span></div>
+    <div class="add-player-form">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;margin-bottom:14px">➕ Aggiungi Giocatore</div>
+      <div class="form-row">
+        <div class="form-group"><label>Nome e Cognome</label><input type="text" id="new-player-name" placeholder="Es. Marco Rossi"></div>
+        <div class="form-group"><label>Posizione</label><select id="new-player-pos"><option value="ATT">⚡ Attaccante</option><option value="CEN">🔵 Centrocampista</option><option value="DIF">🛡️ Difensore</option><option value="POR">🥅 Portiere</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Numero Maglia</label><input type="number" id="new-player-num" placeholder="10"></div>
+        <div class="form-group"><label>Età</label><input type="number" id="new-player-age" placeholder="24"></div>
+      </div>
+      <button class="btn btn-accent" style="max-width:180px" onclick="addPlayer()">AGGIUNGI</button>
+    </div>
+    <div id="rosa-list" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+</div>
+
+<!-- PLAYER APP -->
+
+<div id="player-app">
+  <div class="topbar">
+    <div class="topbar-brand">PerformaPro</div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:11px;color:var(--text2)"><span class="sync-dot"></span>Connesso</span>
+      <button class="btn-logout" onclick="logout()">← Esci</button>
+    </div>
+  </div>
+  <div class="player-header">
+    <div class="player-name-big" id="player-display-name">—</div>
+    <div><span class="player-pos-badge" id="player-pos-badge">—</span></div>
+  </div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="switchPlayerTab('wellness',this)">💚 Benessere</div>
+    <div class="nav-tab" onclick="switchPlayerTab('sonno',this)">😴 Sonno</div>
+    <div class="nav-tab" onclick="switchPlayerTab('nutrizione',this)">🥗 Nutrizione</div>
+    <div class="nav-tab" onclick="switchPlayerTab('ai',this)">🤖 AI Coach</div>
+  </div>
+
+  <!-- WELLNESS -->
+
+  <div class="main-content tab-content active" id="ptab-wellness">
+    <div class="section-title">💚 Check-in <span>Benessere</span></div>
+    <div style="max-width:640px">
+      <div class="slider-group">
+        <div class="slider-header"><div><div class="slider-label">😴 Qualità Sonno</div><div class="slider-desc">1=Pessimo · 10=Perfetto</div></div><div class="slider-val" id="val-sleep">5</div></div>
+        <input type="range" min="1" max="10" value="5" id="sl-sleep" oninput="updateSlider('sleep',this.value)">
+        <div class="range-labels"><span>1 Pessimo</span><span>10 Perfetto</span></div>
+      </div>
+      <div class="slider-group">
+        <div class="slider-header"><div><div class="slider-label">⏱️ Ore di Sonno</div><div class="slider-desc">Totale ore dormite</div></div><div class="slider-val" id="val-hours">7</div></div>
+        <input type="range" min="3" max="12" value="7" step="0.5" id="sl-hours" oninput="updateSlider('hours',this.value)">
+        <div class="range-labels"><span>3h</span><span>12h</span></div>
+      </div>
+      <div class="slider-group">
+        <div class="slider-header"><div><div class="slider-label">💪 Recupero Fisico</div><div class="slider-desc">1=Esausto · 10=Fresco</div></div><div class="slider-val" id="val-physical">5</div></div>
+        <input type="range" min="1" max="10" value="5" id="sl-physical" oninput="updateSlider('physical',this.value)">
+        <div class="range-labels"><span>1 Esausto</span><span>10 Perfetto</span></div>
+      </div>
+      <div class="slider-group">
+        <div class="slider-header"><div><div class="slider-label">🧠 Recupero Mentale</div><div class="slider-desc">1=Stressato · 10=Lucido</div></div><div class="slider-val" id="val-mental">5</div></div>
+        <input type="range" min="1" max="10" value="5" id="sl-mental" oninput="updateSlider('mental',this.value)">
+        <div class="range-labels"><span>1 Stressato</span><span>10 Top</span></div>
+      </div>
+      <div class="slider-group">
+        <div class="slider-header"><div><div class="slider-label">🏃 RPE Ultimo Allenamento</div><div class="slider-desc">Scala Borg 6–20</div></div><div class="slider-val" id="val-rpe">13</div></div>
+        <input type="range" min="6" max="20" value="13" id="sl-rpe" oninput="updateSlider('rpe',this.value)">
+        <div class="range-labels"><span>6 Riposo</span><span>20 Max</span></div>
+      </div>
+      <div class="form-group">
+        <label>❤️ HRV (ms) — se disponibile</label>
+        <input type="number" id="hrv-input" placeholder="Es. 68">
+      </div>
+      <div class="form-group">
+        <label>Note (dolori, tensioni, altro)</label>
+        <textarea id="player-notes" rows="3" placeholder="Es. Tensione polpaccio destro..."></textarea>
+      </div>
+      <button class="btn btn-green" onclick="submitWellness()">📤 INVIA AL COACH</button>
+      <div class="readiness-result" id="readiness-result">
+        <div class="readiness-emoji" id="readiness-emoji">🟢</div>
+        <div class="readiness-score" id="readiness-score-val"></div>
+        <div class="readiness-title" id="readiness-title"></div>
+        <div class="readiness-msg" id="readiness-msg"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SONNO -->
+
+  <div class="main-content tab-content" id="ptab-sonno">
+    <div class="section-title">😴 Monitoraggio <span>Sonno</span></div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:16px">Seleziona la tua app e carica i dati</div>
+    <div class="sleep-apps-grid">
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'WHOOP')"><span>⌚</span> WHOOP</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Oura Ring')"><span>💍</span> Oura Ring</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Garmin')"><span>🟢</span> Garmin</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Apple Watch')"><span>🍎</span> Apple Watch</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Samsung')"><span>📱</span> Samsung</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Fitbit')"><span>💙</span> Fitbit</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Polar')"><span>❤️</span> Polar</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Suunto')"><span>🔵</span> Suunto</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Sleep Cycle')"><span>🌙</span> Sleep Cycle</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Withings')"><span>🏥</span> Withings</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Google Fit')"><span>🟡</span> Google Fit</div>
+      <div class="sleep-app-chip" onclick="selectSleepApp(this,'Altro')"><span>➕</span> Altro</div>
+    </div>
+    <div id="selected-app-label" style="display:none;font-size:12px;color:var(--accent);margin-bottom:14px;font-weight:600"></div>
+    <div class="file-upload-area" onclick="document.getElementById('sleep-file').click()">
+      <input type="file" id="sleep-file" accept="image/*,.pdf" style="display:none" onchange="handleSleepFile(event)">
+      <div style="font-size:28px;margin-bottom:6px">📸</div>
+      <div style="font-weight:600;margin-bottom:3px;font-size:14px">Carica Screenshot / PDF</div>
+      <div style="font-size:12px;color:var(--text2)">Report notturno dalla tua app</div>
+      <img id="sleep-preview" class="preview-img" style="display:none" alt="">
+    </div>
+    <div style="margin-top:20px">
+      <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Dati Manuali Sonno</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">
+        <div class="gps-input-card"><label>Ore Totali</label><input type="number" id="s-ore" step="0.5" placeholder="7.5"><div class="unit">ore</div></div>
+        <div class="gps-input-card"><label>HRV Notturno</label><input type="number" id="s-hrv" placeholder="62"><div class="unit">ms</div></div>
+        <div class="gps-input-card"><label>FC Riposo</label><input type="number" id="s-fc" placeholder="52"><div class="unit">bpm</div></div>
+        <div class="gps-input-card"><label>Sonno Profondo</label><input type="number" id="s-deep" placeholder="90"><div class="unit">min</div></div>
+        <div class="gps-input-card"><label>Sonno REM</label><input type="number" id="s-rem" placeholder="75"><div class="unit">min</div></div>
+        <div class="gps-input-card"><label>Recovery Score</label><input type="number" id="s-rec" placeholder="78"><div class="unit">%</div></div>
+      </div>
+    </div>
+    <button class="btn btn-green mt12" style="max-width:200px;margin-top:16px" onclick="saveSleepData()">💾 SALVA SONNO</button>
+  </div>
+
+  <!-- NUTRIZIONE -->
+
+  <div class="main-content tab-content" id="ptab-nutrizione">
+    <div class="section-title">🥗 Nutrizione <span>per il Recupero</span></div>
+    <div class="nutr-phase-btns">
+      <button class="nutr-phase-btn" style="background:rgba(244,67,54,.15);color:var(--red);border:1px solid rgba(244,67,54,.3)" onclick="showNutrPhase('post')">🍽️ Post-Partita</button>
+      <button class="nutr-phase-btn" style="background:rgba(0,194,255,.15);color:var(--accent);border:1px solid rgba(0,194,255,.3)" onclick="showNutrPhase('pre')">⚡ Pre-Allenamento</button>
+      <button class="nutr-phase-btn" style="background:rgba(0,230,118,.15);color:var(--green);border:1px solid rgba(0,230,118,.3)" onclick="showNutrPhase('recovery')">💤 Recupero/Sonno</button>
+      <button class="nutr-phase-btn" style="background:rgba(255,152,0,.15);color:var(--orange);border:1px solid rgba(255,152,0,.3)" onclick="showNutrPhase('match')">🏟️ Giorno Partita</button>
+    </div>
+    <div id="nutr-content" class="nutrition-grid"></div>
+  </div>
+
+  <!-- AI -->
+
+  <div class="main-content tab-content" id="ptab-ai">
+    <div class="section-title">🤖 AI Coach <span>Personale</span></div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:14px">Chiedi tutto su nutrizione, recupero, sonno e performance. Rispondo con le ultime evidenze scientifiche.</div>
+    <div class="ai-chat">
+      <div class="ai-chat-header">
+        <div class="ai-avatar">🤖</div>
+        <div><div class="ai-name">AI Performance Coach</div><div class="ai-status">● Online</div></div>
+      </div>
+      <div class="ai-messages" id="ai-messages">
+        <div class="msg bot"><div class="msg-bubble">Ciao! Sono il tuo AI Performance Coach. Posso aiutarti con nutrizione, recupero, sonno e performance sportiva. Cosa vuoi sapere?</div><div class="msg-time">Ora</div></div>
+      </div>
+      <div class="quick-qs">
+        <div class="quick-q" onclick="sendQuick(this)">Cosa mangio dopo la partita?</div>
+        <div class="quick-q" onclick="sendQuick(this)">Come migliorare il sonno?</div>
+        <div class="quick-q" onclick="sendQuick(this)">Integratori per il recupero muscolare</div>
+        <div class="quick-q" onclick="sendQuick(this)">Come interpretare il mio HRV?</div>
+      </div>
+      <div class="ai-input-row">
+        <textarea class="ai-input" id="ai-input" rows="1" placeholder="Scrivi la tua domanda..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"></textarea>
+        <button class="ai-send" onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"><span id="toast-icon">✅</span><span id="toast-text">Salvato!</span></div>
+
+<!-- FIREBASE SDK -->
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDI3E72QikNT7clgMLY_uUhVi7LKLD_6Xo",
+  authDomain: "performapro-541ea.firebaseapp.com",
+  databaseURL: "https://performapro-541ea-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "performapro-541ea",
+  storageBucket: "performapro-541ea.firebasestorage.app",
+  messagingSenderId: "546093393761",
+  appId: "1:546093393761:web:f136fa209779e7dde90720"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+window._db = db;
+window._dbRef = ref;
+window._dbSet = set;
+window._dbGet = get;
+window._dbOnValue = onValue;
+window._dbPush = push;
+window._dbRemove = remove;
+window._fbReady = true;
+window.dispatchEvent(new Event('fbready'));
+</script>
+
+<script>
+// ===== CONSTANTS =====
+const COACH_PASS = "prep2024";
+let currentRole = null, currentPlayerName = '', currentPlayerPos = '';
+let selectedMicroDay = '';
+let roster = [];
+let gpsSessions = [];
+let wellnessData = {};
+let unsubReadiness = null;
+
+// ===== WAIT FOR FIREBASE =====
+function waitFB(cb) {
+  if(window._fbReady) cb();
+  else window.addEventListener('fbready', cb, {once:true});
+}
+
+// ===== AUTH =====
+function showAuth(role){ document.getElementById(`auth-${role}`).classList.add('active'); }
+function closeAuth(role){ document.getElementById(`auth-${role}`).classList.remove('active'); }
+
+window.showAuth = showAuth;
+window.closeAuth = closeAuth;
+
+window.loginCoach = function() {
+  if(document.getElementById('coach-pass').value !== COACH_PASS){
+    document.getElementById('coach-err').style.display='block'; return;
+  }
+  closeAuth('coach');
+  document.getElementById('landing').style.display='none';
+  document.getElementById('coach-app').style.display='block';
+  currentRole='coach';
+  initCoach();
+};
+
+window.loginPlayer = function() {
+  const name = document.getElementById('player-name-input').value.trim();
+  const pos = document.getElementById('player-pos-input').value;
+  if(!name) return;
+  currentPlayerName = name;
+  currentPlayerPos = pos;
+  closeAuth('player');
+  document.getElementById('landing').style.display='none';
+  document.getElementById('player-app').style.display='block';
+  currentRole='player';
+  initPlayer();
+};
+
+window.logout = function() {
+  if(unsubReadiness) { unsubReadiness(); unsubReadiness=null; }
+  document.getElementById('landing').style.display='flex';
+  document.getElementById('coach-app').style.display='none';
+  document.getElementById('player-app').style.display='none';
+  currentRole=null;
+};
+
+// ===== COACH INIT =====
+function initCoach() {
+  renderMicrociclo();
+  renderBenchmark('all');
+  waitFB(()=>{
+    loadRoster();
+    listenWellness();
+    loadGpsSessions();
+  });
+}
+
+// ===== ROSTER =====
+function loadRoster() {
+  const r = window._dbRef(window._db,'roster');
+  window._dbOnValue(r, snap=>{
+    roster = [];
+    const data = snap.val()||{};
+    Object.entries(data).forEach(([id,p])=>roster.push({...p,id}));
+    renderRosa();
+    renderReadiness();
+  });
+}
+
+window.addPlayer = function() {
+  const name = document.getElementById('new-player-name').value.trim();
+  const pos = document.getElementById('new-player-pos').value;
+  const num = document.getElementById('new-player-num').value||'?';
+  const age = document.getElementById('new-player-age').value||'?';
+  if(!name) return;
+  waitFB(()=>{
+    const r = window._dbRef(window._db,'roster');
+    window._dbPush(r,{name,pos,num,age});
+    document.getElementById('new-player-name').value='';
+    document.getElementById('new-player-num').value='';
+    document.getElementById('new-player-age').value='';
+    showToast(`${name} aggiunto! ✅`);
+  });
+};
+
+window.removePlayer = function(id) {
+  waitFB(()=>{
+    const r = window._dbRef(window._db,`roster/${id}`);
+    window._dbRemove(r);
+    showToast('Giocatore rimosso');
+  });
+};
+
+function renderRosa() {
+  const list = document.getElementById('rosa-list');
+  if(!list) return;
+  list.innerHTML='';
+  if(roster.length===0){ list.innerHTML='<div style="color:var(--text2);font-size:13px;padding:16px">Nessun giocatore nella rosa</div>'; return; }
+  roster.forEach(p=>{
+    const d = wellnessData[p.name];
+    const dot = !d?'⚪':d.status==='green'?'🟢':d.status==='orange'?'🟠':'🔴';
+    list.innerHTML+=`
+    <div class="session-item">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;color:var(--accent);min-width:32px">#${p.num}</div>
+        <div><div style="font-weight:600;font-size:15px">${p.name}</div><div style="font-size:11px;color:var(--text2)">${p.pos} · ${p.age} anni</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:18px">${dot}</span>
+        <button onclick="removePlayer('${p.id}')" style="background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--text2);padding:4px 9px;font-size:11px;cursor:pointer">Rimuovi</button>
+      </div>
+    </div>`;
+  });
+}
+
+// ===== WELLNESS LISTENER =====
+function listenWellness() {
+  const today = getToday();
+  const r = window._dbRef(window._db,`wellness/${today}`);
+  unsubReadiness = window._dbOnValue(r, snap=>{
+    wellnessData={};
+    const data=snap.val()||{};
+    Object.entries(data).forEach(([name,d])=>{ wellnessData[name]=d; });
+    renderReadiness();
+    renderRosa();
+  });
+}
+
+// ===== READINESS =====
+function renderReadiness() {
+  const grid = document.getElementById('players-grid');
+  if(!grid) return;
+  const microDay = document.getElementById('micro-day-filter')?.value||'';
+  grid.innerHTML='';
+  if(roster.length===0){ grid.innerHTML='<div style="color:var(--text2);font-size:13px;padding:20px">Aggiungi giocatori dalla tab Rosa</div>'; return; }
+  roster.forEach(p=>{
+    const d = wellnessData[p.name];
+    let status='no-data', badge='badge-grey', badgeText='⚪ IN ATTESA', sug='', sugClass='', gpsAdvice='';
+    if(d){
+      status=d.status;
+      if(d.status==='green'){badge='badge-green';badgeText=`🟢 PRONTO (${d.score})`;sugClass='sug-green';sug=`Allenamento completo. Ottimo recupero.`;}
+      if(d.status==='orange'){badge='badge-orange';badgeText=`🟠 ATTENZIONE (${d.score})`;sugClass='sug-orange';sug=`Ridurre HSR del 20-30%. Monitorare durante sessione.`;}
+      if(d.status==='red'){badge='badge-red';badgeText=`🔴 GESTIRE (${d.score})`;sugClass='sug-red';sug=`Solo lavoro rigenerativo. Nessuna intensità.`;}
+      if(microDay && d) { gpsAdvice = getGpsAdvice(d.status, p.pos, microDay); }
+    }
+    const card = document.createElement('div');
+    card.className=`player-card-coach ${status} fade-in`;
+    card.innerHTML=`
+      <div class="pc-header">
+        <div><div class="pc-name">${p.name}</div><div class="pc-pos ${p.pos}">#${p.num} · ${p.pos}</div></div>
+        <div class="readiness-badge ${badge}">${badgeText}</div>
+      </div>
+      ${d?`
+      <div class="pc-metrics">
+        <div class="pc-metric"><div class="val">${d.sleep}/10</div><div class="lbl">Sonno</div></div>
+        <div class="pc-metric"><div class="val">${d.physical}/10</div><div class="lbl">Fisico</div></div>
+        <div class="pc-metric"><div class="val">${d.mental}/10</div><div class="lbl">Mentale</div></div>
+        <div class="pc-metric"><div class="val">${d.hrv||'—'}</div><div class="lbl">HRV</div></div>
+        <div class="pc-metric"><div class="val">${d.hours}h</div><div class="lbl">Sonno</div></div>
+        <div class="pc-metric"><div class="val">RPE${d.rpe}</div><div class="lbl">Ieri</div></div>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar pb-${d.status}" style="width:${d.score}%"></div></div>
+      <div style="font-size:10px;color:var(--text2);text-align:right;margin-top:2px">${d.score}/100</div>
+      <div class="pc-suggestion ${sugClass}" style="margin-top:8px">${sug}</div>
+      ${gpsAdvice?`<div style="margin-top:6px;font-size:11px;background:rgba(0,194,255,.05);border:1px solid rgba(0,194,255,.15);border-radius:6px;padding:8px;color:var(--accent)">${gpsAdvice}</div>`:''}
+      ${d.notes?`<div style="margin-top:6px;font-size:11px;color:var(--text2);background:var(--surface2);border-radius:6px;padding:7px">📝 ${d.notes}</div>`:''}
+      `:`<div style="font-size:13px;color:var(--text2);padding:10px 0">Dati non ancora inseriti oggi</div>`}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function getGpsAdvice(status, pos, microDay) {
+  const bench = benchmarkData.find(b=>b.pos===pos)||benchmarkData[0];
+  const targets = microTargets[microDay];
+  if(!targets) return '';
+  let intensity = status==='green'?'100%':status==='orange'?'70%':'30%';
+  let action = status==='green'?'Allenamento completo':status==='orange'?'Carico ridotto':' Solo rigenerazione';
+  return `📡 ${microDay} · ${action} (${intensity}) | TD target: ${targets.td} | HSR: ${targets.hsr} | Sprint: ${targets.spr}`;
+}
+
+// ===== GPS =====
+const microTargets = {
+  'MD+2':{td:'3.000–4.500m',hsr:'≤250m',spr:'≤30m',acc:'15–25',hmld:'150–250m',info:'🟢 Rigenerazione. HSR max 30% Gref. NESSUN sprint massimale.'},
+  'MD+3':{td:'5.500–7.000m',hsr:'400–550m',spr:'50–100m',acc:'30–45',hmld:'380–520m',info:'🟢 Ripristino. HSR 50-60% Gref. Sprint solo contestuali.'},
+  'MD+4':{td:'7.500–9.500m',hsr:'600–780m',spr:'90–160m',acc:'55–75',hmld:'650–850m',info:'🟠 Sviluppo. Carico principale. HSR 70-80% Gref.'},
+  'MD-1':{td:'3.500–5.000m',hsr:'120–180m',spr:'30–80m',acc:'20–35',hmld:'200–320m',info:'🔴 Pre-partita. HSR <20% Gref. Solo attivazione.'},
+  'MD':{td:'10.500–11.500m',hsr:'800–1.000m',spr:'180–260m',acc:'90–110',hmld:'900–1.100m',info:'⚽ Match Day. Riferimento Gref EPL/LaLiga.'},
+};
+
+window.selectMicro = function(el, day) {
+  selectedMicroDay=day;
+  const t=microTargets[day];
+  document.getElementById('micro-target-info').innerHTML=`<strong style="color:var(--accent);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px">${day} — Target EPL/LaLiga</strong><br><br>${t.info}<br><br>📏 TD: <strong>${t.td}</strong> &nbsp;|&nbsp; 🏃 HSR: <strong>${t.hsr}</strong> &nbsp;|&nbsp; ⚡ Sprint: <strong>${t.spr}</strong> &nbsp;|&nbsp; 🔄 Acc/Dec: <strong>${t.acc}</strong>`;
+};
+
+window.saveGpsSession = function() {
+  const td=document.getElementById('gm-td').value;
+  const hsr=document.getElementById('gm-hsr').value;
+  if(!td&&!hsr){showToast('Inserisci almeno TD e HSR ❗',false);return;}
+  const session={day:selectedMicroDay||'N/D',date:getToday(),td:td||'—',hsr:hsr||'—',spr:document.getElementById('gm-spr').value||'—',acc:document.getElementById('gm-acc').value||'—',dec:document.getElementById('gm-dec').value||'—',vmax:document.getElementById('gm-vmax').value||'—',pl:document.getElementById('gm-pl').value||'—',hmld:document.getElementById('gm-hmld').value||'—'};
+  waitFB(()=>{
+    const r=window._dbRef(window._db,'gpsSessions');
+    window._dbPush(r,session);
+    showToast('Sessione GPS salvata! ✅');
+  });
+};
+
+function loadGpsSessions() {
+  const r=window._dbRef(window._db,'gpsSessions');
+  window._dbOnValue(r,snap=>{
+    gpsSessions=[];
+    const data=snap.val()||{};
+    Object.entries(data).forEach(([id,s])=>gpsSessions.unshift(s));
+    renderSessions();
+  });
+}
+
+function renderSessions() {
+  const list=document.getElementById('session-list');
+  if(!list) return;
+  if(gpsSessions.length===0){list.innerHTML='<div style="color:var(--text2);font-size:13px;padding:16px;text-align:center">Nessuna sessione</div>';return;}
+  list.innerHTML='';
+  gpsSessions.slice(0,10).forEach(s=>{
+    list.innerHTML+=`<div class="session-item"><div><div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px">${s.day}</div><div style="font-size:11px;color:var(--text2)">${s.date}</div></div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="metric-pill pill-blue">TD:${s.td}</span><span class="metric-pill pill-orange">HSR:${s.hsr}</span><span class="metric-pill pill-red">SPR:${s.spr}</span></div></div>`;
+  });
+}
+
+window.handleGpsFile = function(e) {
+  const file=e.target.files[0];if(!file)return;
+  const wrap=document.getElementById('gps-file-preview');
+  const img=document.getElementById('gps-img-preview');
+  if(file.type.startsWith('image/')){
+    const reader=new FileReader();
+    reader.onload=ev=>{img.src=ev.target.result;img.style.display='block';wrap.style.display='block';};
+    reader.readAsDataURL(file);
+  } else {
+    wrap.style.display='block';
+    wrap.innerHTML=`<div style="padding:10px;background:var(--surface2);border-radius:8px;font-size:13px">📄 ${file.name}<br><span style="color:var(--green)">✅ Caricato</span></div>`;
+  }
+  showToast('File GPS caricato ✅');
+};
+
+// ===== MICROCICLO TABLE =====
+const microData = [
+  {day:'MD+2',label:'RIGENERAZIONE',class:'day-rec',focus:'Recupero attivo — flush',td:'3.000–4.500m (30–40%)',hsr:'≤250m (≤30%)',spr:'0–30m',accDec:'15–25',hmld:'150–250m',note:'No sprint >25.2. Piscina, stretching, aerobico blando.'},
+  {day:'MD+3',label:'RIPRISTINO',class:'day-rec',focus:'Ripristino neuromuscolare',td:'5.500–7.000m (50–60%)',hsr:'400–550m (45–60%)',spr:'50–100m (<15%)',accDec:'30–45',hmld:'380–520m',note:'Acc/dec moderate. Tecnica a media intensità.'},
+  {day:'MD+4',label:'SVILUPPO',class:'day-load',focus:'Sessione principale',td:'7.500–9.500m (70–80%)',hsr:'600–780m (70–80%)',spr:'90–160m (40–55%)',accDec:'55–75',hmld:'650–850m',note:'Massima intensità settimana. SSG ad alta densità.'},
+  {day:'MD-1',label:'ATTIVAZIONE',class:'day-md',focus:'Neuro-attivazione pre-gara',td:'3.500–5.000m (30–40%)',hsr:'120–180m (<20%)',spr:'30–80m',accDec:'20–35',hmld:'200–320m',note:'45–55 min. RPE target 11–13. Zero accumulo fatica.'},
+  {day:'MD',label:'MATCH DAY',class:'day-md',focus:'Partita — Gref',td:'10.500–11.500m (100%)',hsr:'800–1.000m (100%)',spr:'180–260m (100%)',accDec:'90–110',hmld:'900–1.100m',note:'Riferimento baseline EPL/LaLiga.'},
+];
+
+function renderMicrociclo() {
+  const tbody=document.getElementById('micro-tbody');if(!tbody)return;
+  tbody.innerHTML='';
+  const colors={'MD+2':'pill-green','MD+3':'pill-green','MD+4':'pill-orange','MD-1':'pill-red','MD':'pill-blue'};
+  microData.forEach(m=>{
+    const c=colors[m.day]||'';
+    tbody.innerHTML+=`<tr><td><div class="day-label ${m.class}">${m.day}</div><div style="font-size:10px;color:var(--text2)">${m.label}</div></td><td style="font-size:12px">${m.focus}</td><td><span class="metric-pill ${c}">${m.td}</span></td><td><span class="metric-pill ${c}">${m.hsr}</span></td><td><span class="metric-pill ${c}">${m.spr}</span></td><td><span class="metric-pill">${m.accDec}</span></td><td><span class="metric-pill ${c}">${m.hmld}</span></td><td style="font-size:11px;color:var(--text2);max-width:200px;line-height:1.4">${m.note}</td></tr>`;
+  });
+}
+
+// ===== BENCHMARK =====
+const benchmarkData = [
+  {pos:'ATT',league:'EPL · LaLiga · Bundesliga',td:'9.500–11.000m',hsr:'650–900m',spr:'190–280m',acc:'38–58',hmld:'720–980m',vmax:'33–37 km/h'},
+  {pos:'CEN',league:'EPL · LaLiga · Serie A',td:'10.500–12.000m',hsr:'800–1.050m',spr:'160–240m',acc:'45–65',hmld:'850–1.100m',vmax:'30–34 km/h'},
+  {pos:'DIF',league:'EPL · Bundesliga · LaLiga',td:'9.000–10.500m',hsr:'500–780m',spr:'100–180m',acc:'35–55',hmld:'620–820m',vmax:'30–35 km/h'},
+  {pos:'POR',league:'EPL · Serie A',td:'5.500–7.000m',hsr:'200–350m',spr:'30–80m',acc:'15–30',hmld:'280–420m',vmax:'18–25 km/h'},
+];
+
+function renderBenchmark(filter) {
+  const grid=document.getElementById('bench-grid');if(!grid)return;
+  const data=filter==='all'?benchmarkData:benchmarkData.filter(b=>b.pos===filter);
+  grid.innerHTML='';
+  data.forEach(b=>{
+    grid.innerHTML+=`<div class="bench-card fade-in"><div class="bench-pos ${b.pos}">${b.pos}</div><div class="bench-league">${b.league}</div><div class="bench-row"><span class="bench-label">📏 TD</span><span class="bench-val">${b.td}</span></div><div class="bench-row"><span class="bench-label">🏃 HSR</span><span class="bench-val">${b.hsr}</span></div><div class="bench-row"><span class="bench-label">⚡ Sprint</span><span class="bench-val">${b.spr}</span></div><div class="bench-row"><span class="bench-label">🔄 Acc≥3</span><span class="bench-val">${b.acc}</span></div><div class="bench-row"><span class="bench-label">🔥 HMLD</span><span class="bench-val">${b.hmld}</span></div><div class="bench-row"><span class="bench-label">🚀 V-Max</span><span class="bench-val">${b.vmax}</span></div></div>`;
+  });
+}
+window.filterBench = function(f){renderBenchmark(f);};
+
+// ===== PLAYER INIT =====
+function initPlayer() {
+  document.getElementById('player-display-name').textContent=currentPlayerName;
+  const badge=document.getElementById('player-pos-badge');
+  badge.textContent={ATT:'⚡ Attaccante',CEN:'🔵 Centrocampista',DIF:'🛡️ Difensore',POR:'🥅 Portiere'}[currentPlayerPos];
+  badge.className=`player-pos-badge pos-${currentPlayerPos}`;
+  ['sleep','physical','mental','rpe'].forEach(id=>{const el=document.getElementById(`sl-${id}`);if(el)updateSlider(id,el.value);});
+  updateSlider('hours',7);
+  showNutrPhase('post');
+}
+
+// ===== WELLNESS SUBMIT =====
+window.submitWellness = function() {
+  const sleep=+document.getElementById('sl-sleep').value;
+  const hours=+document.getElementById('sl-hours').value;
+  const physical=+document.getElementById('sl-physical').value;
+  const mental=+document.getElementById('sl-mental').value;
+  const hrv=+document.getElementById('hrv-input').value||0;
+  const rpe=+document.getElementById('sl-rpe').value;
+  const notes=document.getElementById('player-notes').value;
+  let score=Math.round(sleep*10*.20+Math.min(hours/9*100,100)*.15+physical*10*.25+mental*10*.20+(hrv>0?Math.min(hrv/100*100,100)*0.10:50*.10)+((20-rpe)/14*100)*.10);
+  score=Math.min(100,Math.max(0,score));
+  const status=score>=75?'green':score>=45?'orange':'red';
+  const today=getToday();
+  const nameKey=currentPlayerName.replace(/[.#$\[\]]/g,'_');
+  const data={sleep,hours,physical,mental,hrv,rpe,notes,score,status,pos:currentPlayerPos,timestamp:Date.now()};
+  waitFB(()=>{
+    const r=window._dbRef(window._db,`wellness/${today}/${currentPlayerName}`);
+    window._dbSet(r,data).then(()=>{
+      const msgs={green:'Ottimo recupero! Puoi allenarti al massimo.',orange:'Recupero parziale. Comunica al coach. Gestisci l\'intensità.',red:'Recupero insufficiente. Il coach valuterà un piano rigenerativo.'};
+      const emojis={green:'🟢',orange:'🟠',red:'🔴'};
+      const titles={green:'Pronto al 100%',orange:'Carico Ridotto',red:'Gestione Conservativa'};
+      const result=document.getElementById('readiness-result');
+      result.className=`readiness-result ${status}`;result.style.display='block';
+      document.getElementById('readiness-emoji').textContent=emojis[status];
+      document.getElementById('readiness-score-val').textContent=score;
+      document.getElementById('readiness-score-val').className=`readiness-score ${status}`;
+      document.getElementById('readiness-title').textContent=titles[status];
+      document.getElementById('readiness-msg').textContent=msgs[status];
+      result.scrollIntoView({behavior:'smooth',block:'center'});
+      showToast('Check-in inviato al coach! ✅');
+    }).catch(e=>showToast('Errore connessione ❗',false));
+  });
+};
+
+// ===== SLEEP =====
+window.selectSleepApp = function(el,name) {
+  document.querySelectorAll('.sleep-app-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  const lbl=document.getElementById('selected-app-label');
+  lbl.style.display='block';lbl.textContent=`App: ${name} — Carica screenshot o inserisci manualmente`;
+};
+window.handleSleepFile = function(e) {
+  const file=e.target.files[0];if(!file)return;
+  const preview=document.getElementById('sleep-preview');
+  if(file.type.startsWith('image/')){const reader=new FileReader();reader.onload=ev=>{preview.src=ev.target.result;preview.style.display='block';};reader.readAsDataURL(file);}
+  showToast('Screenshot sonno caricato ✅');
+};
+window.saveSleepData = function() { showToast('Dati sonno salvati! ✅'); };
+
+// ===== NUTRITION =====
+const nutritionPhases = {
+  post:[
+    {title:'⚡ 0–30 min dopo',items:['30–40g proteine rapide (whey)','60–80g carboidrati alto GI (banana, riso)','500ml acqua + elettroliti','Evita grassi: rallentano assorbimento']},
+    {title:'🍽️ Pasto 1–3h dopo',items:['Pollo/pesce + riso o pasta 300g','Verdure cotte (antiossidanti)','20g grassi buoni (olio EVO)','Frutta fresca con vit. C']},
+    {title:'💊 Supplementazione',items:['Creatina: 3–5g (se in protocollo)','Omega-3: 2–3g (antinfiammatorio)','Magnesio glicinato: 300–400mg','Tart cherry 30ml (riduce DOMS)']},
+    {title:'💧 Reidratazione',items:['1kg perso = 1.5L da reintegrare','Sodio-potassio nelle prime 2h','Evita alcol (compromette HRV)','Urine chiare = ok']},
+  ],
+  pre:[
+    {title:'🕒 3–4h prima',items:['300–500 kcal carboidrati medio GI','20–30g proteine magre','Grassi <15g','500ml acqua']},
+    {title:'⏱️ 60–90 min prima',items:['1–2 banana o 30g riso soffiato','Caffeina: 3–6 mg/kg (30–60 min prima)','No cibi ad alto contenuto di grassi','No cibi ad alto contenuto di fibre']},
+    {title:'⚡ 15–30 min prima',items:['5–10g maltodestrine se necessario','200ml acqua','Nessun esperimento con cibi nuovi','Beta-alanina 3.2g se in protocollo']},
+  ],
+  recovery:[
+    {title:'😴 Pre-sonno 60–90 min',items:['Caseina 40g (rilascio lento notturno)','Kiwi x2 o tart cherry (melatonina)','Magnesio 300–400mg (qualità sonno)','Latte + miele (triptofano)']},
+    {title:'🌙 Protocollo sonno élite',items:['Ambiente 16–18°C (ottimale)','Blackout totale (melatonina)','No schermo 60 min prima','Melatonina 0.5–1mg se necessario']},
+    {title:'🔥 Recovery tools',items:['CWI 10–15°C per 10–15 min (post-partita)','Contrast therapy: caldo+freddo','Foam rolling + stretching 15 min','Compressione gambe notturna']},
+  ],
+  match:[
+    {title:'🌅 Colazione 3–4h prima',items:['Porridge 80g + latte + miele + banana','2–3 uova strapazzate','Succo frutta 200ml','Caffè (se abituato)']},
+    {title:'🍝 Pasto pre-gara 3h prima',items:['Pasta 200g al pomodoro','Pollo alla piastra 150g','Pane bianco','1 frutto (mela o pera)']},
+    {title:'🥤 Durante la gara',items:['Idratazione ogni 15–20 min','Gel energetici dopo 70 min','Caffeina gum al 45\' (secondo tempo)','Elettroliti: sodio per crampi']},
+  ],
+};
+window.showNutrPhase = function(phase) {
+  const c=document.getElementById('nutr-content');if(!c)return;
+  c.innerHTML='';
+  (nutritionPhases[phase]||[]).forEach(card=>{
+    c.innerHTML+=`<div class="nutr-card fade-in"><h4>${card.title}</h4><ul>${card.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+  });
+};
+
+// ===== AI =====
+window.sendMessage = async function() {
+  const input=document.getElementById('ai-input');
+  const text=input.value.trim();if(!text)return;
+  addMsg(text,'user');input.value='';
+  const thinking=addThinking();
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:`Sei un AI Performance Coach per calciatori professionisti. Rispondi SEMPRE in italiano. Esperto in: nutrizione sportiva, recupero, HRV, sonno atleti, periodizzazione, GPS metrics (HSR, sprint, acc/dec). Basi le risposte su evidenze scientifiche 2022-2025. Risposte chiare e pratiche max 200 parole. Usa emoji. Riferimento a EPL, LaLiga, Bundesliga quando possibile.`,messages:[{role:'user',content:text}]})});
+    const data=await res.json();
+    thinking.remove();
+    const reply=data.content?.map(b=>b.text||'').join('')||'Errore nella risposta.';
+    addMsg(reply,'bot');
+  } catch(e){thinking.remove();addMsg('Errore connessione. Riprova.','bot');}
+};
+function addMsg(text,role){
+  const msgs=document.getElementById('ai-messages');
+  const now=new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+  const div=document.createElement('div');div.className=`msg ${role} fade-in`;
+  div.innerHTML=`<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div><div class="msg-time">${now}</div>`;
+  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;return div;
+}
+function addThinking(){
+  const msgs=document.getElementById('ai-messages');
+  const div=document.createElement('div');div.className='msg bot';
+  div.innerHTML=`<div class="msg-bubble"><div class="ai-thinking"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>`;
+  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;return div;
+}
+window.sendQuick=function(el){document.getElementById('ai-input').value=el.textContent;window.sendMessage();};
+
+// ===== SLIDERS =====
+window.updateSlider=function(id,val){
+  const display=document.getElementById(`val-${id}`);if(display)display.textContent=val;
+  const el=document.getElementById(`sl-${id}`);
+  if(el){const min=+el.min,max=+el.max;const pct=((val-min)/(max-min))*100;el.style.setProperty('--val',pct+'%');}
+};
+
+// ===== TABS =====
+window.switchCoachTab=function(tab,el){
+  document.querySelectorAll('#coach-app .tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#coach-app .nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');el.classList.add('active');
+};
+window.switchPlayerTab=function(tab,el){
+  document.querySelectorAll('#player-app .tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#player-app .nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(`ptab-${tab}`).classList.add('active');el.classList.add('active');
+};
+
+// ===== UTILS =====
+function getToday(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function showToast(msg,ok=true){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-icon').textContent=ok?'✅':'❗';
+  document.getElementById('toast-text').textContent=msg;
+  t.style.borderColor=ok?'var(--green)':'var(--orange)';
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
+}
+window.showToast=showToast;
+window.renderReadiness=renderReadiness;
+</script>
+
+</body>
+</html>
